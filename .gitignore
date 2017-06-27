@@ -57,5 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# GIMP image editing files
+.xcf
+
 # Other files
 package-lock.json
