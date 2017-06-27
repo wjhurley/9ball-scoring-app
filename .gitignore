@@ -58,7 +58,7 @@ typings/
 .env
 
 # GIMP image editing files
-.xcf
+*.xcf
 
 # Other files
 package-lock.json
