@@ -1,0 +1,7 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+}
+.navitem {
+  flex: 1;
+}

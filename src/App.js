@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import logo from './img/9ball.png';
+
+import Navbar from './components/Navbar/Navbar';
+import PlayerStatus from './components/PlayerStatus/PlayerStatus';
+import Balls from './components/Balls/Balls';
+import Buttons from './components/Buttons/Buttons';
+
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>9-Ball Scoring App</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Navbar />
+        <PlayerStatus />
+        <Balls />
+        <Buttons />
       </div>
     );
   }
