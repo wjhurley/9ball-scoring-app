@@ -1,7 +1,9 @@
 .navbar {
   display: flex;
   flex-direction: column;
+  list-style-type: none;
 }
 .navitem {
   flex: 1;
+  display: inline-block;
 }
