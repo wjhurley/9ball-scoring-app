@@ -65,3 +65,4 @@ typings/
 
 # Other files
 package-lock.json
+server.js

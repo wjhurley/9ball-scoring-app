@@ -5,13 +5,32 @@ import Navitem from './Navitem';
 import './Navbar.css';
 
 class Navbar extends Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(text) {
+    this.props.onClick(text);
+  }
   render() {
     return (
       <nav className='navbar'>
-        <Navitem text='Setup' />
-        <Navitem text='Play' />
-        <Navitem text='Stats' />
-        <Navitem text='Edit' />
+        <Navitem
+          text='Setup'
+          onClick={(text) => this.handleClick(text)}
+        />
+        <Navitem
+          text='Play'
+          onClick={(text) => this.handleClick(text)}
+        />
+        <Navitem
+          text='Stats'
+          onClick={(text) => this.handleClick(text)}
+        />
+        <Navitem
+          text='Edit'
+          onClick={(text) => this.handleClick(text)}
+        />
       </nav>
     );
   }
