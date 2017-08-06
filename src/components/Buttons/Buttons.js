@@ -7,10 +7,16 @@ import './Buttons.css';
 class Buttons extends Component {
   render() {
     return (
-      <div>
-        <Button text='Miss' />
-        <Button text='Unlock Dead Balls' />
-        <Button text='Defense' />
+      <div className="buttons">
+        <Button
+          text='Miss'
+        />
+        <Button
+          text='Unlock Dead Balls'
+        />
+        <Button
+          text='Defense'
+        />
       </div>
     );
   }

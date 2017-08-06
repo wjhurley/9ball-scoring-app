@@ -6,7 +6,7 @@ class Ball extends Component {
   render() {
     return (
       <img
-        className='ball'
+        className="ball"
         src={this.props.src}
         alt={this.props.alt}
       />

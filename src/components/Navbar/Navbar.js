@@ -9,27 +9,27 @@ class Navbar extends Component {
     super();
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(text) {
-    this.props.onClick(text);
+  handleClick(route) {
+    this.props.onClick(route);
   }
   render() {
     return (
-      <nav className='navbar'>
+      <nav className="navbar App-header">
         <Navitem
-          text='Setup'
-          onClick={(text) => this.handleClick(text)}
+          route='Setup'
+          onClick={(route) => this.handleClick(route)}
         />
         <Navitem
-          text='Play'
-          onClick={(text) => this.handleClick(text)}
+          route='Play'
+          onClick={(route) => this.handleClick(route)}
         />
         <Navitem
-          text='Stats'
-          onClick={(text) => this.handleClick(text)}
+          route='Stats'
+          onClick={(route) => this.handleClick(route)}
         />
         <Navitem
-          text='Edit'
-          onClick={(text) => this.handleClick(text)}
+          route='Edit'
+          onClick={(route) => this.handleClick(route)}
         />
       </nav>
     );
