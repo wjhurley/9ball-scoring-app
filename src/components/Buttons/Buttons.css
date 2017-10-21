@@ -1,0 +1,16 @@
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+.button {
+  flex: 1;
+  margin: 10px 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #9b1d20;
+  color: #fff;
+}
+.setupButton {
+  flex: 0 1 46px;
+}

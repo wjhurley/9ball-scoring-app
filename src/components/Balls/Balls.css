@@ -1,8 +1,11 @@
+.balls {
+  overflow: hidden;
+}
 .ball {
   /*animation: Ball-spin infinite 20s linear;*/
   width: 30%;
-  padding-left: 1%;
-  padding-right: 1%;
+  padding: 1%;
+  flex: 1;
   transform:rotate(-45deg);
 }
 

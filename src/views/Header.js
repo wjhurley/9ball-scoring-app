@@ -7,13 +7,13 @@ class Header extends Component {
     super();
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(text) {
-    this.props.onClick(text);
+  handleClick(route) {
+    this.props.onClick(route);
   }
   render() {
     return (
       <Navbar
-        onClick={(text) => this.handleClick(text)}
+        onClick={(route) => this.handleClick(route)}
       />
     );
   }

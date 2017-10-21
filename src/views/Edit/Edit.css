@@ -1,0 +1,10 @@
+.edit {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+}
+.editP1,
+.editP2 {
+  flex-direction: column;
+  flex: 1;
+}

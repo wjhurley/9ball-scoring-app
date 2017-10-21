@@ -7,17 +7,18 @@ class Navitem extends Component {
     super();
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(text) {
-    this.props.onClick(text);
+  handleClick(route) {
+    this.props.onClick(route);
   }
   render() {
-    let text = this.props.text;
+    let route = this.props.route;
     return (
       <li
         className='navitem'
-        onClick={() => this.handleClick(text)}
+        tabIndex={this.props.index}
+        onClick={() => this.handleClick(route)}
       >
-        {text}
+        {route}
       </li>
     );
   }
