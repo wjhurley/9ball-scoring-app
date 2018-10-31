@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import './Balls.css';
 
-class Ball extends Component {
-  render() {
+export interface Props {
+  src: string;
+  alt: string;
+}
+
+class Ball extends React.Component<Props, {}> {
+  public render() {
     return (
       <img
         className="ball"

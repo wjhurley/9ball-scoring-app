@@ -1,16 +1,28 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import './Navbar.css';
 
-class Navitem extends Component {
-  constructor() {
-    super();
+export interface Props {
+  index: number;
+  onClick: (route: string) => void;
+  route: string;
+}
+
+interface State {
+
+}
+
+class Navitem extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
     this.handleClick = this.handleClick.bind(this);
   }
-  handleClick(route) {
+
+  private handleClick = (route: string) => {
     this.props.onClick(route);
-  }
-  render() {
+  };
+
+  public render() {
     let route = this.props.route;
     return (
       <li

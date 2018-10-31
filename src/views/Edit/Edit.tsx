@@ -1,11 +1,20 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import Button from './../../components/Buttons/Button';
 
 import './Edit.css';
 
-class Edit extends Component {
-  render() {
+export interface Props {
+  p1score: number;
+  p1defense: number;
+  innings: number;
+  deadBalls: number;
+  p2score: number;
+  p2defense: number;
+}
+
+class Edit extends React.Component<Props, {}> {
+  public render() {
     return (
       <div className="edit">
         <div className="editP1">
@@ -16,7 +25,7 @@ class Edit extends Component {
           <Button
             text='-'
           />
-          <p>P1 Defs: {this.props.p1def}</p>
+          <p>P1 Defs: {this.props.p1defense}</p>
           <Button
             text='+'
           />
@@ -39,7 +48,7 @@ class Edit extends Component {
           <Button
             text='-'
           />
-          <p>P2 Defs: {this.props.p2def}</p>
+          <p>P2 Defs: {this.props.p2defense}</p>
           <Button
             text='+'
           />

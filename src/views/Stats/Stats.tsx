@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import './Stats.css';
 
-class Stats extends Component {
-  render() {
+class Stats extends React.Component {
+  public render() {
     return (
       <div>
         <h1>Total Stats</h1>

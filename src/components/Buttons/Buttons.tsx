@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import Button from './Button';
 
 import './Buttons.css';
 
-class Buttons extends Component {
-  render() {
+class Buttons extends React.Component {
+  public render() {
     return (
       <div className="buttons">
         <Button

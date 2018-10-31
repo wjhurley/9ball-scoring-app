@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 import Ball from './Ball';
 
@@ -13,8 +13,8 @@ import sevenball from './../../img/7ball.png';
 import eightball from './../../img/8ball.png';
 import nineball from './../../img/9ball.png';
 
-class Balls extends Component {
-  render() {
+class Balls extends React.Component {
+  public render() {
     return (
       <div>
         <div className="balls">
