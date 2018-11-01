@@ -53,12 +53,10 @@ npm install
 ```
 
 ### Repo Structure
-
-  * **public/index.html**: the page template
-  * **src/index.tsx**: the TypeScript entry point, React is rendered into DOM here, Redux store is configured, and Redux is connected to React.
-  * **src/components**: All React components are defined here. `App.tsx` is the top-level component.
-  * **src/index.css**: Global styles
+- **public/index.html**: the page template
+- **src/index.tsx**: the TypeScript entry point, React is rendered into DOM here, Redux store is configured, and Redux is connected to React.
+- **src/components**: All React components are defined here. `App.tsx` is the top-level component.
+- **src/index.css**: Global styles
 
 ### Making your Contribution
-
 Coming Soon
