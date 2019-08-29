@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "incremental": true,
+    "module": "commonjs",
+    "outDir": "./server/dist",
+    "removeComments": true,
+    "rootDir": "./server/src"
+  },
+  "exclude": [
+    "dist",
+    "src"
+  ]
+}

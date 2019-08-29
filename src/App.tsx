@@ -15,7 +15,7 @@ export interface PlayerLevel {
   ballsRequired: number;
 }
 
-export interface Props {
+interface Props {
 
 }
 
@@ -25,7 +25,7 @@ interface State {
 }
 
 class App extends React.Component<Props, State> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props);
     this.state = {
       playerLevels: [
@@ -64,10 +64,11 @@ class App extends React.Component<Props, State> {
         {
           skillLevel: 9,
           ballsRequired: 75,
-        }
+        },
       ],
       currentRoute: '',
     };
+
     this.handleRoute = this.handleRoute.bind(this);
   }
 
@@ -79,55 +80,52 @@ class App extends React.Component<Props, State> {
   }
 
   public render() {
-    let route = this.state.currentRoute;
+    const route = this.state.currentRoute;
     if (route === 'Play') {
       return (
-        <div className="App">
+        <div className={'App'}>
           <Header
-            onClick={(route: string) => this.handleRoute(route)}
+            onClick={this.handleRoute}
           />
           <Main>
             <Play />
           </Main>
         </div>
       );
-    }
-    else if (route === 'Edit') {
+    } else if (route === 'Edit') {
       return (
-        <div className="App">
+        <div className={'App'}>
           <Header
-            onClick={(route: string) => this.handleRoute(route)}
+            onClick={this.handleRoute}
           />
           <Main>
             <Edit
-              p1score={0}
-              p1defense={0}
-              innings={0}
               deadBalls={0}
-              p2score={0}
-              p2defense={0}
+              innings={0}
+              p1Defense={0}
+              p1Score={0}
+              p2Defense={0}
+              p2Score={0}
             />
           </Main>
         </div>
       );
-    }
-    else if (route === 'Stats') {
+    } else if (route === 'Stats') {
       return (
-        <div className="App">
+        <div className={'App'}>
           <Header
-            onClick={(route: string) => this.handleRoute(route)}
+            onClick={this.handleRoute}
           />
           <Main>
             <Stats />
           </Main>
         </div>
       );
-    }
-    else {
+    } else {
       return (
-        <div className="App">
+        <div className={'App'}>
           <Header
-            onClick={(route: string) => this.handleRoute(route)}
+            onClick={this.handleRoute}
           />
           <Main>
             <Setup />

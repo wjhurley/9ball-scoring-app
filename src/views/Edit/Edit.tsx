@@ -4,63 +4,86 @@ import Button from './../../components/Buttons/Button';
 
 import './Edit.css';
 
-export interface Props {
-  p1score: number;
-  p1defense: number;
-  innings: number;
+interface Props {
   deadBalls: number;
-  p2score: number;
-  p2defense: number;
+  innings: number;
+  p1Defense: number;
+  p1Score: number;
+  p2Defense: number;
+  p2Score: number;
 }
 
 class Edit extends React.Component<Props, {}> {
+  public props: Props;
+
   public render() {
+    const {
+      deadBalls,
+      innings,
+      p1Defense,
+      p1Score,
+      p2Defense,
+      p2Score,
+    } = this.props;
+
     return (
-      <div className="edit">
-        <div className="editP1">
-          <p>P1 Score: {this.props.p1score}</p>
+      <div className={'edit'}>
+        <div className={'editP1'}>
+          <p>
+            {`P1 Score: ${p1Score}`}
+          </p>
           <Button
-            text='+'
+            text={'+'}
           />
           <Button
-            text='-'
+            text={'-'}
           />
-          <p>P1 Defs: {this.props.p1defense}</p>
+          <p>
+            {`P1 Defs: ${p1Defense}`}
+          </p>
           <Button
-            text='+'
-          />
-          <Button
-            text='-'
-          />
-          <p>Innings: {this.props.innings}</p>
-          <Button
-            text='+'
+            text={'+'}
           />
           <Button
-            text='-'
+            text={'-'}
+          />
+          <p>
+            {`Innings: ${innings}`}
+          </p>
+          <Button
+            text={'+'}
+          />
+          <Button
+            text={'-'}
           />
         </div>
-        <div className="editP2">
-          <p>P2 Score: {this.props.p2score}</p>
+        <div className={'editP2'}>
+          <p>
+            {`P2 Score: ${p2Score}`}
+          </p>
           <Button
-            text='+'
+            text={'+'}
           />
           <Button
-            text='-'
+            text={'-'}
           />
-          <p>P2 Defs: {this.props.p2defense}</p>
+          <p>
+            {`P2 Defs: ${p2Defense}`}
+          </p>
           <Button
-            text='+'
-          />
-          <Button
-            text='-'
-          />
-          <p>Dead Balls: {this.props.deadBalls}</p>
-          <Button
-            text='+'
+            text={'+'}
           />
           <Button
-            text='-'
+            text={'-'}
+          />
+          <p>
+            {`Dead Balls: ${deadBalls}`}
+          </p>
+          <Button
+            text={'+'}
+          />
+          <Button
+            text={'-'}
           />
         </div>
       </div>

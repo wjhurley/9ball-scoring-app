@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "importHelpers": true,
+    "jsx": "react",
+    "lib": ["es6", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "./build/dist",
+    "rootDir": "./src"
+  },
+  "exclude": [
+    "acceptance-tests",
+    "build",
+    "jest",
+    "scripts",
+    "server",
+    "src/setupTests.ts",
+    "webpack"
+  ]
+}

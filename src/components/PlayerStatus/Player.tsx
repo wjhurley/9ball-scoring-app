@@ -2,24 +2,29 @@ import * as React from 'react';
 
 import './PlayerStatus.css';
 
-export interface Props {
+interface Props {
   player: string;
   currentPts: number;
   requiredPts: number;
   defense: number;
 }
 
-class Player extends React.Component<Props, {}> {
+class Player extends React.PureComponent<Props> {
+  public props: Readonly<Props>;
+
   public render() {
     const {
       player,
       currentPts,
       requiredPts,
-      defense
+      defense,
     } = this.props;
     const pointsLeft = requiredPts - currentPts;
+
     return (
-      <p>{`${player} ${currentPts}/${requiredPts} (${pointsLeft}) Def:${defense}`}</p>
+      <p className={'player-info'}>
+        {`${player} ${currentPts}/${requiredPts} (${pointsLeft}) Def:${defense}`}
+      </p>
     );
   }
 }

@@ -7,11 +7,11 @@ export interface Props {
   alt: string;
 }
 
-class Ball extends React.Component<Props, {}> {
+class Ball extends React.PureComponent<Props> {
   public render() {
     return (
       <img
-        className="ball"
+        className={'ball'}
         src={this.props.src}
         alt={this.props.alt}
       />

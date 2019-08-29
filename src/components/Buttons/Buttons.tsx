@@ -4,18 +4,18 @@ import Button from './Button';
 
 import './Buttons.css';
 
-class Buttons extends React.Component {
+class Buttons extends React.PureComponent {
   public render() {
     return (
-      <div className="buttons">
+      <div className={'buttons'}>
         <Button
-          text='Miss'
+          text={'Miss'}
         />
         <Button
-          text='Unlock Dead Balls'
+          text={'Unlock Dead Balls'}
         />
         <Button
-          text='Defense'
+          text={'Defense'}
         />
       </div>
     );

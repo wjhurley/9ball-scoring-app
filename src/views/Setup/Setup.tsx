@@ -5,54 +5,51 @@ import TextBox from './../../components/TextBox/TextBox';
 
 import './Setup.css';
 
-export interface Props {
+interface Props {}
 
-}
-
-interface State {
-
-}
+interface State {}
 
 class Setup extends React.Component<Props, State> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props);
+
     this.checkPlayerName = this.checkPlayerName.bind(this);
   }
+
   private checkPlayerName(name: string): boolean {
     // TODO: Create function that will check db for player's name
     return name ? true : false;
   }
 
   public render() {
-    let buttonText: string = 'Set Data and Start Match';
     return (
-      <div className="setup">
+      <div className={'setup'}>
         <h1>Match Setup</h1>
-        <div className="player1">
+        <div className={'player1'}>
           <TextBox
-            className="p1Name"
+            className={'p1Name'}
             onChange={() => this.checkPlayerName}
-            placeholder="Player 1 Name"
+            placeholder={'Player 1 Name'}
           />
           <TextBox
-            className="p1Skill"
-            placeholder="Skill Level"
+            className={'p1Skill'}
+            placeholder={'Skill Level'}
           />
         </div>
-        <div className="player2">
+        <div className={'player2'}>
           <TextBox
-            className="p2Name"
+            className={'p2Name'}
             onChange={() => this.checkPlayerName}
-            placeholder="Player 2 Name"
+            placeholder={'Player 2 Name'}
           />
           <TextBox
-            className="p2Skill"
-            placeholder="Skill Level"
+            className={'p2Skill'}
+            placeholder={'Skill Level'}
           />
         </div>
         <Button
-          className="setupButton button"
-          text={buttonText}
+          className={'setupButton button'}
+          text={'Set Data and Start Match'}
         />
       </div>
     );

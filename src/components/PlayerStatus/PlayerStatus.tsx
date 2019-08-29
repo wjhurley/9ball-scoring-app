@@ -13,7 +13,9 @@ export interface Props {
   p2defense: number;
 }
 
-class PlayerStatus extends React.Component<Props, {}> {
+class PlayerStatus extends React.PureComponent<Props> {
+  public props: Readonly<Props>;
+
   public render() {
     const {
       p1currentPts,
@@ -21,18 +23,19 @@ class PlayerStatus extends React.Component<Props, {}> {
       p1defense,
       p2currentPts,
       p2requiredPts,
-      p2defense
+      p2defense,
     }  = this.props;
+
     return (
       <div>
         <Player
-          player="Player 1"
+          player={'Player 1'}
           currentPts={p1currentPts || 0}
           requiredPts={p1requiredPts || 0}
           defense={p1defense || 0}
         />
         <Player
-          player="Player 2"
+          player={'Player 2'}
           currentPts={p2currentPts || 0}
           requiredPts={p2requiredPts || 0}
           defense={p2defense || 0}

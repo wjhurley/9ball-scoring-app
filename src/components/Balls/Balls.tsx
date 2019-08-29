@@ -17,7 +17,7 @@ class Balls extends React.Component {
   public render() {
     return (
       <div>
-        <div className="balls">
+        <div className={'balls'}>
           <Ball
             src={oneball}
             alt={'1-ball'}
@@ -31,7 +31,7 @@ class Balls extends React.Component {
             alt={'3-ball'}
           />
         </div>
-        <div className="balls">
+        <div className={'balls'}>
           <Ball
             src={fourball}
             alt={'4-ball'}
@@ -45,7 +45,7 @@ class Balls extends React.Component {
             alt={'6-ball'}
           />
         </div>
-        <div className="balls">
+        <div className={'balls'}>
           <Ball
             src={sevenball}
             alt={'7-ball'}

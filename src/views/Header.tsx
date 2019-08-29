@@ -2,17 +2,14 @@ import * as React from 'react';
 
 import Navbar from './../components/Navbar/Navbar';
 
-export interface Props {
+interface Props {
   onClick: (route: string) => void;
 }
 
-interface State {
-
-}
-
-class Header extends React.Component<Props, State> {
-  constructor(props: Props) {
+class Header extends React.Component<Props, {}> {
+  public constructor(props: Props) {
     super(props);
+
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -23,7 +20,7 @@ class Header extends React.Component<Props, State> {
   public render() {
     return (
       <Navbar
-        onClick={(route: string) => this.handleClick(route)}
+        onClick={this.handleClick}
       />
     );
   }

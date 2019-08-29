@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.server.json",
+  "compilerOptions": {
+    "declaration": true,
+    "incremental": true,
+    "module": "commonjs",
+    "outDir": "./server/dist",
+    "removeComments": true,
+    "rootDir": "./server/src"
+  },
+  "exclude": [
+    "**/*spec.ts",
+    "build",
+    "node_modules",
+    "server/dist",
+    "server/test",
+    "src"
+  ]
+}

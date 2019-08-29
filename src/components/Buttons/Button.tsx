@@ -1,35 +1,37 @@
+import * as _ from 'lodash';
 import * as React from 'react';
 
 import './Buttons.css';
 
-export interface Props {
+interface Props {
   className?: string;
   onClick?: () => void;
   text: string;
 }
 
-interface State {
-
-}
-
-class Button extends React.Component<Props, State> {
-  constructor(props: Props) {
+class Button extends React.Component<Props, {}> {
+  public constructor(props: Props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
   private handleClick() {
-    this.props.onClick
-      ? this.props.onClick()
-      : () => { return false; };
+    if (this.props.onClick) {
+      this.props.onClick();
+    }
+
+    return false;
   }
 
   public render() {
-    let className = this.props.className;
+    const className = !_.isNil(this.props.className)
+      ? this.props.className
+      : 'button';
+
     return (
       <button
-        className={className ? className : "button"}
-        onClick={() => this.handleClick()}
+        className={className}
+        onClick={this.handleClick}
       >
         {this.props.text}
       </button>
