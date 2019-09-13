@@ -44,6 +44,8 @@ lerna-debug.log*
 
 # Production
 /build
+temp/
+tmp/
 
 # Testing
 /coverage

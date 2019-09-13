@@ -1,3 +1,4 @@
+import * as Express from 'express';
 import {
   Body,
   Controller,
@@ -9,28 +10,30 @@ import {
   Request,
   Response,
 } from '@nestjs/common';
-import * as Express from 'express';
 
-import { CreatePlayerDto } from './player.dto';
+import { Player } from '../entity/Player';
+import { PlayerService } from '../service/player.service';
 
 @Controller('api/player')
 export class PlayerController {
+  constructor(private readonly playerService: PlayerService) {}
+
   @Post()
-  public create(
-    @Body() body: CreatePlayerDto,
+  public async create(
+    @Body() player: Player,
     @Request() req: Express.Request,
     @Response() res: Express.Response,
   ) {
-    console.log(body);
-    res.status(HttpStatus.CREATED).send();
+    console.log(player);
+    await this.playerService.create(player);
   }
 
   @Get()
-  public findAll(
+  public async findAll(
     @Request() req: Express.Request,
     @Response() res: Express.Response,
-  ) {
-     res.status(HttpStatus.OK).json([]);
+  ): Promise<Player[]> {
+     return await this.playerService.findAll();
   }
 
   @Get(':id')
