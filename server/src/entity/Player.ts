@@ -44,7 +44,7 @@ export class Player {
   pass: string;
 
   @Column({
-    default: 'CURRENT_TIMESTAMP',
+    default: () => 'CURRENT_TIMESTAMP',
     name: 'created_at',
     nullable: false,
     type: 'timestamptz',
