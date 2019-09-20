@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 import { SkillLevel } from './SkillLevel';
 
@@ -50,7 +44,7 @@ export class Player {
     type: 'timestamptz',
   })
   createdAt: Date;
-  
+
   @ManyToOne(type => SkillLevel, skillLevel => skillLevel.players)
   @JoinColumn({
     name: 'skill_level',

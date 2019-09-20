@@ -13,12 +13,7 @@ class Player extends React.PureComponent<Props> {
   public props: Readonly<Props>;
 
   public render() {
-    const {
-      player,
-      currentPts,
-      requiredPts,
-      defense,
-    } = this.props;
+    const { player, currentPts, requiredPts, defense } = this.props;
     const pointsLeft = requiredPts - currentPts;
 
     return (

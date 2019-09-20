@@ -9,13 +9,7 @@ export interface Props {
 
 class Ball extends React.PureComponent<Props> {
   public render() {
-    return (
-      <img
-        className={'ball'}
-        src={this.props.src}
-        alt={this.props.alt}
-      />
-    );
+    return <img className={'ball'} src={this.props.src} alt={this.props.alt} />;
   }
 }
 

@@ -18,46 +18,19 @@ class Balls extends React.Component {
     return (
       <div>
         <div className={'balls'}>
-          <Ball
-            src={oneball}
-            alt={'1-ball'}
-          />
-          <Ball
-            src={twoball}
-            alt={'2-ball'}
-          />
-          <Ball
-            src={threeball}
-            alt={'3-ball'}
-          />
+          <Ball src={oneball} alt={'1-ball'} />
+          <Ball src={twoball} alt={'2-ball'} />
+          <Ball src={threeball} alt={'3-ball'} />
         </div>
         <div className={'balls'}>
-          <Ball
-            src={fourball}
-            alt={'4-ball'}
-          />
-          <Ball
-            src={fiveball}
-            alt={'5-ball'}
-          />
-          <Ball
-            src={sixball}
-            alt={'6-ball'}
-          />
+          <Ball src={fourball} alt={'4-ball'} />
+          <Ball src={fiveball} alt={'5-ball'} />
+          <Ball src={sixball} alt={'6-ball'} />
         </div>
         <div className={'balls'}>
-          <Ball
-            src={sevenball}
-            alt={'7-ball'}
-          />
-          <Ball
-            src={eightball}
-            alt={'8-ball'}
-          />
-          <Ball
-            src={nineball}
-            alt={'9-ball'}
-          />
+          <Ball src={sevenball} alt={'7-ball'} />
+          <Ball src={eightball} alt={'8-ball'} />
+          <Ball src={nineball} alt={'9-ball'} />
         </div>
       </div>
     );

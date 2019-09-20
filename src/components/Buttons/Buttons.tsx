@@ -8,15 +8,9 @@ class Buttons extends React.PureComponent {
   public render() {
     return (
       <div className={'buttons'}>
-        <Button
-          text={'Miss'}
-        />
-        <Button
-          text={'Unlock Dead Balls'}
-        />
-        <Button
-          text={'Defense'}
-        />
+        <Button text={'Miss'} />
+        <Button text={'Unlock Dead Balls'} />
+        <Button text={'Defense'} />
       </div>
     );
   }

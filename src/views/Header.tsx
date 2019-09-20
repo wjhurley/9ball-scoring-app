@@ -18,11 +18,7 @@ class Header extends React.Component<Props, {}> {
   }
 
   public render() {
-    return (
-      <Navbar
-        onClick={this.handleClick}
-      />
-    );
+    return <Navbar onClick={this.handleClick} />;
   }
 }
 

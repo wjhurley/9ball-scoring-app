@@ -24,7 +24,7 @@ class PlayerStatus extends React.PureComponent<Props> {
       p2currentPts,
       p2requiredPts,
       p2defense,
-    }  = this.props;
+    } = this.props;
 
     return (
       <div>

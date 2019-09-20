@@ -7,13 +7,7 @@ import { PlayerService } from './service/player.service';
 
 @Module({
   imports: [],
-  controllers: [
-    AppController,
-    PlayerController,
-  ],
-  providers: [
-    AppService,
-    PlayerService,
-  ],
+  controllers: [AppController, PlayerController],
+  providers: [AppService, PlayerService],
 })
 export class AppModule {}

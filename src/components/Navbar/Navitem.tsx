@@ -22,11 +22,7 @@ class Navitem extends React.Component<Props, {}> {
     const route = this.props.route;
 
     return (
-      <li
-        className={'navitem'}
-        tabIndex={this.props.index}
-        onClick={() => this.handleClick(route)}
-      >
+      <li className={'navitem'} tabIndex={this.props.index} onClick={() => this.handleClick(route)}>
         {route}
       </li>
     );

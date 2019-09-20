@@ -24,15 +24,10 @@ class Button extends React.Component<Props, {}> {
   }
 
   public render() {
-    const className = !_.isNil(this.props.className)
-      ? this.props.className
-      : 'button';
+    const className = !_.isNil(this.props.className) ? this.props.className : 'button';
 
     return (
-      <button
-        className={className}
-        onClick={this.handleClick}
-      >
+      <button className={className} onClick={this.handleClick}>
         {this.props.text}
       </button>
     );

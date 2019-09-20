@@ -15,9 +15,7 @@ export interface PlayerLevel {
   ballsRequired: number;
 }
 
-interface Props {
-
-}
+interface Props {}
 
 interface State {
   playerLevels: PlayerLevel[];
@@ -73,7 +71,6 @@ class App extends React.Component<Props, State> {
   }
 
   private handleRoute(route: string): void {
-    console.log(route);
     this.setState({
       currentRoute: route,
     });
@@ -84,9 +81,7 @@ class App extends React.Component<Props, State> {
     if (route === 'Play') {
       return (
         <div className={'App'}>
-          <Header
-            onClick={this.handleRoute}
-          />
+          <Header onClick={this.handleRoute} />
           <Main>
             <Play />
           </Main>
@@ -95,27 +90,16 @@ class App extends React.Component<Props, State> {
     } else if (route === 'Edit') {
       return (
         <div className={'App'}>
-          <Header
-            onClick={this.handleRoute}
-          />
+          <Header onClick={this.handleRoute} />
           <Main>
-            <Edit
-              deadBalls={0}
-              innings={0}
-              p1Defense={0}
-              p1Score={0}
-              p2Defense={0}
-              p2Score={0}
-            />
+            <Edit deadBalls={0} innings={0} p1Defense={0} p1Score={0} p2Defense={0} p2Score={0} />
           </Main>
         </div>
       );
     } else if (route === 'Stats') {
       return (
         <div className={'App'}>
-          <Header
-            onClick={this.handleRoute}
-          />
+          <Header onClick={this.handleRoute} />
           <Main>
             <Stats />
           </Main>
@@ -124,9 +108,7 @@ class App extends React.Component<Props, State> {
     } else {
       return (
         <div className={'App'}>
-          <Header
-            onClick={this.handleRoute}
-          />
+          <Header onClick={this.handleRoute} />
           <Main>
             <Setup />
           </Main>

@@ -1,3 +1,4 @@
+// tslint:disable:no-console
 import { createConnection } from 'typeorm';
 import { NestFactory } from '@nestjs/core';
 import 'reflect-metadata';
@@ -9,7 +10,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.listen(5000);
 
-  const configuration = new OrmConfig;
+  const configuration = new OrmConfig();
   const configSettings = configuration.getConfig();
 
   await createConnection(configSettings)

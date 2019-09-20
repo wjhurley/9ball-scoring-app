@@ -6,11 +6,7 @@ export interface Props {
 
 class Main extends React.Component<Props, {}> {
   public render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    );
+    return <div>{this.props.children}</div>;
   }
 }
 

@@ -21,26 +21,10 @@ class Navbar extends React.Component<Props, {}> {
   public render() {
     return (
       <nav className={'navbar App-header'}>
-        <Navitem
-          index={1}
-          route={'Setup'}
-          onClick={this.handleClick}
-        />
-        <Navitem
-          index={2}
-          route={'Play'}
-          onClick={this.handleClick}
-        />
-        <Navitem
-          index={3}
-          route={'Stats'}
-          onClick={this.handleClick}
-        />
-        <Navitem
-          index={4}
-          route={'Edit'}
-          onClick={this.handleClick}
-        />
+        <Navitem index={1} route={'Setup'} onClick={this.handleClick} />
+        <Navitem index={2} route={'Play'} onClick={this.handleClick} />
+        <Navitem index={3} route={'Stats'} onClick={this.handleClick} />
+        <Navitem index={4} route={'Edit'} onClick={this.handleClick} />
       </nav>
     );
   }

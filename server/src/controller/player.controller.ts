@@ -33,7 +33,7 @@ export class PlayerController {
     @Request() req: Express.Request,
     @Response() res: Express.Response,
   ): Promise<Player[]> {
-     return await this.playerService.findAll();
+    return await this.playerService.findAll();
   }
 
   @Get(':id')
