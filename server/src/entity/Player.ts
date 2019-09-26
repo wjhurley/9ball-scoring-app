@@ -1,5 +1,7 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 
+import { PlayerGame } from './PlayerGame';
+import { PlayerTeam } from './PlayerTeam';
 import { SkillLevel } from './SkillLevel';
 
 @Entity()
@@ -9,33 +11,33 @@ export class Player {
     nullable: false,
     type: 'int',
   })
-  playerId: number;
+  public playerId: number;
 
   @Column({
     length: 25,
     name: 'first_name',
     nullable: false,
   })
-  firstName: string;
+  public firstName: string;
 
   @Column({
     length: 50,
     name: 'last_name',
     nullable: false,
   })
-  lastName: string;
+  public lastName: string;
 
   @Column({
     length: 50,
     nullable: false,
   })
-  email: string;
+  public email: string;
 
   @Column({
     length: 50,
     nullable: false,
   })
-  pass: string;
+  public pass: string;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
@@ -43,11 +45,25 @@ export class Player {
     nullable: false,
     type: 'timestamptz',
   })
-  createdAt: Date;
+  public createdAt: Date;
+
+  @Column({
+    default: null,
+    name: 'updated_at',
+    nullable: true,
+    type: 'timestamptz',
+  })
+  public updatedAt: Date;
 
   @ManyToOne(type => SkillLevel, skillLevel => skillLevel.players)
   @JoinColumn({
     name: 'skill_level',
   })
-  skillLevel: SkillLevel;
+  public skillLevel: SkillLevel;
+
+  @OneToMany(type => PlayerGame, playerGame => playerGame.playerId)
+  public games: PlayerGame[];
+
+  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.playerId)
+  public teams: PlayerTeam[];
 }
