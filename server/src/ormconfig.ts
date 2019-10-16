@@ -2,29 +2,25 @@ import { DotenvParseOutput, parse } from 'dotenv';
 import * as Fs from 'fs';
 import * as Path from 'path';
 import { BaseConnectionOptions } from 'typeorm/connection/BaseConnectionOptions';
+import { LoggerOptions } from 'typeorm/logger/LoggerOptions';
 
 interface EnvObject {
-  POSTGRES_USER: string;
   POSTGRES_PASS: string;
+  POSTGRES_USER: string;
 }
 
 export interface OrmConfiguration extends BaseConnectionOptions {
-  type: 'postgres';
-  host: string;
-  port: number;
-  username: string;
-  password: string;
   database: string;
-  synchronize: boolean;
-  logging: boolean;
   entities: string[];
+  host: string;
+  logging: LoggerOptions;
   migrations: string[];
+  password: string;
+  port: number;
   subscribers: string[];
-  cli: {
-    entitiesDir: string;
-    migrationsDir: string;
-    subscribersDir: string;
-  };
+  synchronize: boolean;
+  type: 'postgres';
+  username: string;
 }
 
 export class OrmConfig {
@@ -44,13 +40,13 @@ export class OrmConfig {
 
   private static getDesiredEnvVars(envArgs: DotenvParseOutput): EnvObject {
     const defaultEnvVars: EnvObject = {
-      POSTGRES_USER: '',
       POSTGRES_PASS: '',
+      POSTGRES_USER: '',
     };
 
     for (const key in defaultEnvVars) {
       if (envArgs.hasOwnProperty(key)) {
-        defaultEnvVars[key] = envArgs[key];
+        defaultEnvVars[key as keyof EnvObject] = envArgs[key];
       }
     }
 
@@ -58,9 +54,6 @@ export class OrmConfig {
   }
 
   public static setConfig(): OrmConfiguration {
-    // TODO: install and use `dotenv-webpack` once CRA ejected to fix `server:start:prod` script
-    const typeOrmDir = process.env.NODE_ENV === 'production' ? 'server/dist' : 'server/src';
-    const fileExt = process.env.NODE_ENV === 'production' ? 'js' : 'ts';
     const dotEnvFilePath = Path.resolve(__dirname, '../../.env');
     let dotEnv: Buffer | string = '';
 
@@ -72,22 +65,17 @@ export class OrmConfig {
     const dbVariables: EnvObject = OrmConfig.getDesiredEnvVars(envVariables);
 
     return {
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: dbVariables.POSTGRES_USER,
-      password: dbVariables.POSTGRES_PASS,
       database: 'break_n_score',
+      entities: [__dirname + '/../**/*.entity.js'],
+      host: 'localhost',
+      logging: ['error'],
+      migrations: [__dirname + '/../**/*.migration.js'],
+      password: dbVariables.POSTGRES_PASS,
+      port: 5432,
+      subscribers: [__dirname + '/../**/*.subscriber.js'],
       synchronize: true,
-      logging: false,
-      entities: [`${typeOrmDir}/entity/*.${fileExt}`],
-      migrations: [`${typeOrmDir}/migration/*.${fileExt}`],
-      subscribers: [`${typeOrmDir}/subscriber/*.${fileExt}`],
-      cli: {
-        entitiesDir: `${typeOrmDir}/entity`,
-        migrationsDir: `${typeOrmDir}/migration`,
-        subscribersDir: `${typeOrmDir}/subscriber`,
-      },
+      type: 'postgres',
+      username: dbVariables.POSTGRES_USER,
     };
   }
 }

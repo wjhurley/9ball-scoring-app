@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { AppController } from './controller/app.controller';
-import { AppService } from './service/app.service';
-import { PlayerController } from './controller/player.controller';
-import { PlayerService } from './service/player.service';
+import { AuthModule } from './auth/auth.module';
+import { OrmConfig } from './ormconfig';
+import { PlayerModule } from './player/player.module';
 
+const configuration = new OrmConfig();
+const configSettings = configuration.getConfig();
+console.log(JSON.stringify(configSettings));
 @Module({
-  imports: [],
-  controllers: [AppController, PlayerController],
-  providers: [AppService, PlayerService],
+  imports: [AuthModule, PlayerModule, TypeOrmModule.forRoot(configSettings)],
 })
 export class AppModule {}

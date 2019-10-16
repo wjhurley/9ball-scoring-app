@@ -1,12 +1,18 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
-# Compiled output
-/dist
+# Production/Compiled output
+/client/build
 /server/dist
+temp/
+tmp/
 *.tsbuildinfo
 
 # Dependencies
 /node_modules
+/client/node_modules
+/server/node_modules
+/client/.pnp
+.pnp.js
 
 # IDE - VSCode
 .vscode/*
@@ -42,12 +48,7 @@ lerna-debug.log*
 # OS
 .DS_Store
 
-# Production
-/build
-temp/
-tmp/
-
 # Testing
-/coverage
-/.nyc_output
+/client/coverage
 /server/coverage
+/server/.nyc_output

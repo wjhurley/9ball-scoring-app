@@ -1,26 +1,24 @@
-// tslint:disable:no-console
-import { createConnection } from 'typeorm';
-import { NestFactory } from '@nestjs/core';
+import { Logger } from '@nestjs/common';
+import { NestApplication, NestFactory } from '@nestjs/core';
 import 'reflect-metadata';
 
+import config = require('config');
+
 import { AppModule } from './app.module';
-import { OrmConfig } from './ormconfig';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(5000);
+export interface ServerConfiguration {
+  origin?: string;
+  port: number;
+}
 
-  const configuration = new OrmConfig();
-  const configSettings = configuration.getConfig();
+async function bootstrap(): Promise<void> {
+  const serverConfig: ServerConfiguration = config.get('server');
+  const port = process.env.PORT || serverConfig.port;
+  const logger = new Logger('bootstrap');
+  const app: NestApplication = await NestFactory.create(AppModule);
 
-  await createConnection(configSettings)
-    .then(connection => {
-      // TODO: determine if anything needs to be done with the db at this point
-      console.log('connected to break_n_score');
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  await app.listen(port);
+  logger.log(`Application listening on port ${port}`);
 }
 
 bootstrap();

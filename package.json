@@ -5,43 +5,11 @@
   "author": "William Hurley",
   "license": "MIT",
   "dependencies": {
-    "@nestjs/common": "^6.5.3",
-    "@nestjs/core": "^6.5.3",
-    "@nestjs/platform-express": "^6.5.3",
-    "@types/dotenv": "^6.1.1",
-    "@types/jest": "24.0.11",
-    "@types/lodash": "^4.14.137",
-    "@types/node": "11.13.4",
-    "@types/react": "^16.9.2",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-redux": "^6.0.9",
-    "dotenv": "^8.1.0",
-    "lodash": "^4.17.15",
-    "pg": "^7.12.1",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "react-redux": "^5.1.0",
-    "redux": "^4.0.1",
-    "reflect-metadata": "^0.1.13",
     "rimraf": "^2.6.2",
-    "rxjs": "^6.5.2",
-    "semantic-ui-react": "^0.83.0",
-    "typeorm": "^0.2.18",
-    "typescript": "^3.5.3"
+    "typescript": "3.6.4"
   },
   "devDependencies": {
-    "@nestjs/testing": "^6.5.3",
-    "@types/enzyme": "^3.1.14",
-    "@types/enzyme-adapter-react-16": "^1.0.3",
-    "@types/express": "4.16.1",
-    "@types/jest": "24.0.11",
-    "@types/node": "11.13.4",
-    "@types/react": "^16.9.2",
-    "@types/react-dom": "^16.9.0",
-    "@types/supertest": "2.0.7",
     "cross-env": "^5.2.1",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
@@ -51,39 +19,13 @@
     "husky": ">=1",
     "lint-staged": ">=8",
     "prettier": "1.17.0",
-    "react-scripts-ts": "3.1.0",
-    "react-test-renderer": "^16.6.0",
-    "supertest": "4.0.2",
-    "ts-node": "^8.3.0",
-    "tsc-watch": "^2.4.0",
-    "tsconfig-paths": "3.8.0",
-    "tslint": "5.16.0",
-    "typescript": "^3.5.3"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ]
+    "tslint": "^5.20.0"
   },
   "scripts": {
-    "client:build": "react-scripts-ts build",
-    "client:start": "react-scripts-ts start",
-    "client:test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject",
-    "format": "prettier --write \"{src,server/src}/**/*.{ts,tsx}\"",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
-    "server:build": "rimraf ./server/dist tsconfig.build.tsbuildinfo && tsc -p tsconfig.build.json --outDir server/dist",
-    "server:start": "ts-node -r tsconfig-paths/register server/src/main.ts",
-    "server:start:debug": "cross-env NODE_ENV=production tsc-watch -p tsconfig.build.json --outDir server/dist --onSuccess \"node --inspect-brk server/dist/main.js\"",
-    "server:start:dev": "cross-env NODE_ENV=production tsc-watch -p tsconfig.build.json --outDir ./server/dist --onSuccess \"node server/dist/main.js\"",
-    "server:start:prod": "cross-env NODE_ENV=production npm run server:build && node server/dist/main.js",
-    "server:test": "jest",
-    "server:test:cov": "jest --coverage",
-    "server:test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "server:test:e2e": "jest --config ./server/test/jest-e2e.json",
-    "server:test:watch": "jest --watch"
+    "format": "prettier --write \"{client/src,server/src}/**/*.{ts,tsx}\"",
+    "lint:client": "tslint -p client/tsconfig.json -c tslint.json",
+    "lint:server": "tslint -p server/tsconfig.json -c tslint.json"
   },
-  "proxy": "http://localhost:5000",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
