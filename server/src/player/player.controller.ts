@@ -1,37 +1,36 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Logger,
+  Post,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/user.entity';
+import { CreatePlayerDto } from './dto/create-player.dto';
 import { Player } from './player.entity';
 import { PlayerService } from './player.service';
 
 @Controller('api/player')
+@UseGuards(AuthGuard())
 export class PlayerController {
-  constructor(private readonly playerService: PlayerService) {}
+  private logger = new Logger('PlayerController');
+
+  constructor(private playerService: PlayerService) {}
 
   @Post()
-  public async create(@Body() player: Player) {
-    console.log(player);
-    await this.playerService.create(player);
-
-    return 'new player account created';
-  }
-
-  @Get()
-  public async findAll(): Promise<Player[]> {
-    return await this.playerService.findAll();
-  }
-
-  @Get(':id')
-  public async findOne(@Param('id') id: number): Promise<Player | Error> {
-    return await this.playerService.findOne(id);
-  }
-
-  @Post('login')
-  public async login(@Body() player: Partial<Player>) {
-    return await this.playerService.authenticate(player);
-  }
-
-  @Delete(':id')
-  public async remove(@Param('id') id: number) {
-    return await this.playerService.deletePlayer(id);
+  @UsePipes(ValidationPipe)
+  public createPlayer(
+    @Body() createPlayerDto: CreatePlayerDto,
+    @GetUser() user: User,
+  ): Promise<Player> {
+    this.logger.verbose(
+      `User "${user.email}" creating a new player. Data: ${JSON.stringify(createPlayerDto)}`,
+    );
+    return this.playerService.createPlayer(createPlayerDto, user);
   }
 }

@@ -7,7 +7,7 @@ import { PlayerModule } from './player/player.module';
 
 const configuration = new OrmConfig();
 const configSettings = configuration.getConfig();
-console.log(JSON.stringify(configSettings));
+
 @Module({
   imports: [AuthModule, PlayerModule, TypeOrmModule.forRoot(configSettings)],
 })

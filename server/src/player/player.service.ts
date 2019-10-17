@@ -1,52 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as _ from 'lodash';
-import { Repository } from 'typeorm';
 
+import { User } from '../auth/user.entity';
+import { CreatePlayerDto } from './dto/create-player.dto';
+import { GetPlayerInfoDto } from './dto/get-player-info.dto';
 import { Player } from './player.entity';
+import { PlayerRepository } from './player.repository';
 
 @Injectable()
 export class PlayerService {
   constructor(
-    @InjectRepository(Player)
-    private readonly playerRepository: Repository<Player>,
+    @InjectRepository(PlayerRepository)
+    private playerRepository: PlayerRepository,
   ) {}
 
-  private readonly players: Player[] = [];
-
-  public authenticate(player: Partial<Player>) {
-    // TODO: add something to authenticate here?
+  public createPlayer(createPlayerDto: CreatePlayerDto, user: User): Promise<Player> {
+    return this.playerRepository.createPlayer(createPlayerDto, user);
   }
 
-  public create(player: Player): void {
-    this.players.push(player);
-  }
-
-  public deletePlayer(id: number): string | Error {
-    const index = this.players.findIndex(element => {
-      return element.id === id;
-    });
-
-    if (index === -1) {
-      throw new Error('player not found');
-    }
-
-    return `player ${id} deleted`;
-  }
-
-  public async findAll(): Promise<Player[]> {
-    return await this.playerRepository.find();
-  }
-
-  public findOne(id: number): Player | Error {
-    const player = this.players.find(element => {
-      return element.id === id;
-    });
-
-    if (_.isNil(player)) {
-      throw new Error('player not found');
-    }
-
-    return player;
+  public getPlayerInfo(format: GetPlayerInfoDto, user: User): Promise<Player[]> {
+    return this.playerRepository.getPlayerInfo(format, user);
   }
 }

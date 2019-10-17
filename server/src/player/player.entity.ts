@@ -1,12 +1,20 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
+import { User } from '../auth/user.entity';
 import { PlayerGame } from '../entity/player-game.entity';
 import { PlayerTeam } from '../entity/player-team.entity';
 import { SkillLevel } from '../entity/skill-level.entity';
-import { User } from '../auth/user.entity';
 
 @Entity()
-export class Player {
+export class Player extends BaseEntity {
   @PrimaryGeneratedColumn({
     type: 'int',
   })
