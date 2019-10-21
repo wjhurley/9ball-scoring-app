@@ -1,26 +1,22 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Player } from '../player/player.entity';
 
 @Entity('skill_level')
-export class SkillLevel {
-  @PrimaryGeneratedColumn({
-    type: 'int',
-  })
-  public id: number;
-
-  @Column({
-    name: 'skill_level',
-    nullable: false,
-    type: 'smallint',
-  })
-  public skillLevel: number;
-
+export class SkillLevel extends BaseEntity {
   @Column({
     length: 20,
     nullable: false,
   })
   public format: string;
+
+  @PrimaryGeneratedColumn({
+    type: 'int',
+  })
+  public id: number;
+
+  @OneToMany(type => Player, player => player.skillLevel)
+  public players: Player[];
 
   @Column({
     name: 'points_required',
@@ -30,13 +26,17 @@ export class SkillLevel {
   public pointsRequired: number;
 
   @Column({
+    name: 'skill_level',
+    nullable: false,
+    type: 'smallint',
+  })
+  public skillLevel: number;
+
+  @Column({
     default: 1,
     name: 'tournament_tier',
     nullable: false,
     type: 'smallint',
   })
   public tournamentTier: number;
-
-  @OneToMany(type => Player, player => player.skillLevel)
-  public players: Player[];
 }

@@ -1,10 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 import { Player } from '../player/player.entity';
 import { Team } from '../team/team.entity';
 
 @Entity('player_team')
-export class PlayerTeam {
+export class PlayerTeam extends BaseEntity {
   @Column({
     default: false,
     name: 'captain',
@@ -29,14 +29,6 @@ export class PlayerTeam {
   })
   public createdAt: Date;
 
-  @Column({
-    default: null,
-    name: 'updated_at',
-    nullable: true,
-    type: 'timestamptz',
-  })
-  public updatedAt: Date;
-
   @ManyToOne(type => Player, player => player.teams, { primary: true })
   @JoinColumn({
     name: 'player_id',
@@ -48,4 +40,12 @@ export class PlayerTeam {
     name: 'team_id',
   })
   public teamId: Team;
+
+  @Column({
+    default: null,
+    name: 'updated_at',
+    nullable: true,
+    type: 'timestamptz',
+  })
+  public updatedAt: Date;
 }

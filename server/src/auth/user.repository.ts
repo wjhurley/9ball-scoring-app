@@ -1,13 +1,17 @@
 import { ConflictException, InternalServerErrorException } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
-import { Repository, EntityRepository } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
 
-import { User } from './user.entity';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+import { User } from './user.entity';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-  async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
+  private async hashPassword(password: string, salt: string): Promise<string> {
+    return bcrypt.hash(password, salt);
+  }
+
+  public async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
     const duplicateUserErrorCode = '23505';
     const { email, password } = authCredentialsDto;
 
@@ -27,7 +31,9 @@ export class UserRepository extends Repository<User> {
     }
   }
 
-  async validateUserPassword(authCredentialsDto: AuthCredentialsDto): Promise<string | null> {
+  public async validateUserPassword(
+    authCredentialsDto: AuthCredentialsDto,
+  ): Promise<string | null> {
     const { email, password } = authCredentialsDto;
     const user = await this.findOne({ email });
 
@@ -36,9 +42,5 @@ export class UserRepository extends Repository<User> {
     } else {
       return null;
     }
-  }
-
-  private async hashPassword(password: string, salt: string): Promise<string> {
-    return bcrypt.hash(password, salt);
   }
 }

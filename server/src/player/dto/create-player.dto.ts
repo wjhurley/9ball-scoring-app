@@ -5,11 +5,11 @@ import { PlayerFormat } from '../player-format.enum';
 
 export class CreatePlayerDto {
   @IsNotEmpty()
-  public playerNumber: number;
-
-  @IsNotEmpty()
   @IsIn([PlayerFormat.EIGHT, PlayerFormat.NINE])
   public format: PlayerFormat;
+
+  @IsNotEmpty()
+  public playerNumber: number;
 
   @IsNotEmpty()
   public skillLevel: SkillLevel;

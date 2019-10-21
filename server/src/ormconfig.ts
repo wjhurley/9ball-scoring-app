@@ -24,19 +24,11 @@ export interface OrmConfiguration extends BaseConnectionOptions {
 }
 
 export class OrmConfig {
-  private readonly configuration: OrmConfiguration;
-
-  public constructor() {
+  constructor() {
     this.configuration = OrmConfig.setConfig();
   }
 
-  public getConfig(): OrmConfiguration {
-    if (this.configuration) {
-      return this.configuration;
-    }
-
-    return OrmConfig.setConfig();
-  }
+  private readonly configuration: OrmConfiguration;
 
   private static getDesiredEnvVars(envArgs: DotenvParseOutput): EnvObject {
     const defaultEnvVars: EnvObject = {
@@ -77,5 +69,13 @@ export class OrmConfig {
       type: 'postgres',
       username: dbVariables.POSTGRES_USER,
     };
+  }
+
+  public getConfig(): OrmConfiguration {
+    if (this.configuration) {
+      return this.configuration;
+    }
+
+    return OrmConfig.setConfig();
   }
 }

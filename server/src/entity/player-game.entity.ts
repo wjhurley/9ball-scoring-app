@@ -1,17 +1,52 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
-import { Game } from './game.entity';
 import { Player } from '../player/player.entity';
+import { Game } from './game.entity';
 
 @Entity('player_game')
-export class PlayerGame {
+export class PlayerGame extends BaseEntity {
   @Column({
     default: 0,
-    name: 'points_scored',
+    name: 'break_and_run',
     nullable: false,
     type: 'smallint',
   })
-  public pointsScored: number;
+  public breakAndRun: number;
+
+  @Column({
+    default: () => 'CURRENT_TIMESTAMP',
+    name: 'created_at',
+    nullable: false,
+    type: 'timestamptz',
+  })
+  public createdAt: Date;
+
+  @Column({
+    default: 0,
+    nullable: false,
+    type: 'smallint',
+  })
+  public defense: number;
+
+  @ManyToOne(type => Game, game => game.players, { primary: true })
+  @JoinColumn({
+    name: 'game_id',
+  })
+  public gameId: Game;
+
+  @Column({
+    default: 0,
+    name: 'nine_on_snap',
+    nullable: false,
+    type: 'smallint',
+  })
+  public nineOnSnap: number;
+
+  @ManyToOne(type => Player, player => player.games, { primary: true })
+  @JoinColumn({
+    name: 'player_id',
+  })
+  public playerId: Player;
 
   @Column({
     default: 0,
@@ -23,33 +58,11 @@ export class PlayerGame {
 
   @Column({
     default: 0,
+    name: 'points_scored',
     nullable: false,
     type: 'smallint',
   })
-  public defense: number;
-
-  @Column({
-    default: 0,
-    nullable: false,
-    type: 'smallint',
-  })
-  public timeout: number;
-
-  @Column({
-    default: 0,
-    name: 'break_and_run',
-    nullable: false,
-    type: 'smallint',
-  })
-  public breakAndRun: number;
-
-  @Column({
-    default: 0,
-    name: 'nine_on_snap',
-    nullable: false,
-    type: 'smallint',
-  })
-  public nineOnSnap: number;
+  public pointsScored: number;
 
   @Column({
     default: false,
@@ -59,19 +72,11 @@ export class PlayerGame {
   public skunk: boolean;
 
   @Column({
-    default: false,
+    default: 0,
     nullable: false,
-    type: 'boolean',
+    type: 'smallint',
   })
-  public won: boolean;
-
-  @Column({
-    default: () => 'CURRENT_TIMESTAMP',
-    name: 'created_at',
-    nullable: false,
-    type: 'timestamptz',
-  })
-  public createdAt: Date;
+  public timeout: number;
 
   @Column({
     default: null,
@@ -81,15 +86,10 @@ export class PlayerGame {
   })
   public updatedAt: Date;
 
-  @ManyToOne(type => Game, game => game.players, { primary: true })
-  @JoinColumn({
-    name: 'game_id',
+  @Column({
+    default: false,
+    nullable: false,
+    type: 'boolean',
   })
-  public gameId: Game;
-
-  @ManyToOne(type => Player, player => player.games, { primary: true })
-  @JoinColumn({
-    name: 'player_id',
-  })
-  public playerId: Player;
+  public won: boolean;
 }

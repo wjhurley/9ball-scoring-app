@@ -15,7 +15,27 @@
     "interface-name": [false],
     "max-line-length": [true, 150],
     "member-access": [true],
-    "member-ordering": [true],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "protected-constructor",
+          "private-constructor",
+          "public-constructor",
+          "protected-static-field",
+          "private-static-field",
+          "public-static-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "public-instance-field",
+          "protected-static-method",
+          "private-static-method",
+          "public-static-method",
+          "protected-instance-method"
+        ],
+        "alphabetize": true
+      }
+    ],
     "object-literal-sort-keys": true,
     "ordered-imports": [true],
     "quotemark": [true, "single"]

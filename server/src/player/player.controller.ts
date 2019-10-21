@@ -18,9 +18,9 @@ import { PlayerService } from './player.service';
 @Controller('api/player')
 @UseGuards(AuthGuard())
 export class PlayerController {
-  private logger = new Logger('PlayerController');
-
   constructor(private playerService: PlayerService) {}
+
+  private logger = new Logger('PlayerController');
 
   @Post()
   @UsePipes(ValidationPipe)

@@ -1,13 +1,16 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Match } from './match.entity';
 
 @Entity()
-export class Session {
+export class Session extends BaseEntity {
   @PrimaryGeneratedColumn({
     type: 'int',
   })
   public id: number;
+
+  @OneToMany(type => Match, match => match.session)
+  public matches: Match[];
 
   @Column({
     length: 10,
@@ -21,7 +24,4 @@ export class Session {
     type: 'date',
   })
   public year: Date;
-
-  @OneToMany(type => Match, match => match.session)
-  public matches: Match[];
 }

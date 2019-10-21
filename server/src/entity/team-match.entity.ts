@@ -1,10 +1,18 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
-import { Match } from './match.entity';
 import { Team } from '../team/team.entity';
+import { Match } from './match.entity';
 
 @Entity('team_match')
-export class TeamMatch {
+export class TeamMatch extends BaseEntity {
+  @Column({
+    default: () => 'CURRENT_TIMESTAMP',
+    name: 'created_at',
+    nullable: false,
+    type: 'timestamptz',
+  })
+  public createdAt: Date;
+
   @Column({
     default: 0,
     nullable: false,
@@ -20,29 +28,6 @@ export class TeamMatch {
   })
   public homeTeam: boolean;
 
-  @Column({
-    default: false,
-    nullable: false,
-    type: 'boolean',
-  })
-  public won: boolean;
-
-  @Column({
-    default: () => 'CURRENT_TIMESTAMP',
-    name: 'created_at',
-    nullable: false,
-    type: 'timestamptz',
-  })
-  public createdAt: Date;
-
-  @Column({
-    default: null,
-    name: 'updated_at',
-    nullable: true,
-    type: 'timestamptz',
-  })
-  public updatedAt: Date;
-
   @ManyToOne(type => Match, match => match.teams, { primary: true })
   @JoinColumn({
     name: 'match_id',
@@ -54,4 +39,19 @@ export class TeamMatch {
     name: 'team_id',
   })
   public teamId: Team;
+
+  @Column({
+    default: null,
+    name: 'updated_at',
+    nullable: true,
+    type: 'timestamptz',
+  })
+  public updatedAt: Date;
+
+  @Column({
+    default: false,
+    nullable: false,
+    type: 'boolean',
+  })
+  public won: boolean;
 }

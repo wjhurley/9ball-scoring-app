@@ -15,6 +15,23 @@ import { SkillLevel } from '../entity/skill-level.entity';
 
 @Entity()
 export class Player extends BaseEntity {
+  @Column({
+    default: () => 'CURRENT_TIMESTAMP',
+    name: 'created_at',
+    nullable: false,
+    type: 'timestamptz',
+  })
+  public createdAt: Date;
+
+  @Column({
+    length: 20,
+    nullable: false,
+  })
+  public format: string;
+
+  @OneToMany(type => PlayerGame, playerGame => playerGame.playerId)
+  public games: PlayerGame[];
+
   @PrimaryGeneratedColumn({
     type: 'int',
   })
@@ -27,19 +44,14 @@ export class Player extends BaseEntity {
   })
   public playerNumber: number;
 
-  @Column({
-    length: 20,
-    nullable: false,
+  @ManyToOne(type => SkillLevel, skillLevel => skillLevel.players)
+  @JoinColumn({
+    name: 'skill_level',
   })
-  public format: string;
+  public skillLevel: SkillLevel;
 
-  @Column({
-    default: () => 'CURRENT_TIMESTAMP',
-    name: 'created_at',
-    nullable: false,
-    type: 'timestamptz',
-  })
-  public createdAt: Date;
+  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.playerId)
+  public teams: PlayerTeam[];
 
   @Column({
     default: null,
@@ -54,16 +66,4 @@ export class Player extends BaseEntity {
     name: 'user_id',
   })
   public userId: User;
-
-  @ManyToOne(type => SkillLevel, skillLevel => skillLevel.players)
-  @JoinColumn({
-    name: 'skill_level',
-  })
-  public skillLevel: SkillLevel;
-
-  @OneToMany(type => PlayerGame, playerGame => playerGame.playerId)
-  public games: PlayerGame[];
-
-  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.playerId)
-  public teams: PlayerTeam[];
 }
