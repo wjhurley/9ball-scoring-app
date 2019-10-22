@@ -40,7 +40,7 @@ export class User extends BaseEntity {
   public lastName: string;
 
   @Column({
-    length: 50,
+    length: 100,
     nullable: false,
   })
   public password: string;

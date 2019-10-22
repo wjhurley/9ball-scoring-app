@@ -3,6 +3,7 @@ import * as bcrypt from 'bcryptjs';
 import { EntityRepository, Repository } from 'typeorm';
 
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 
 @EntityRepository(User)
@@ -11,12 +12,14 @@ export class UserRepository extends Repository<User> {
     return bcrypt.hash(password, salt);
   }
 
-  public async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
+  public async signUp(createUserDto: CreateUserDto): Promise<void> {
     const duplicateUserErrorCode = '23505';
-    const { email, password } = authCredentialsDto;
+    const { email, firstName, lastName, password } = createUserDto;
 
     const user = new User();
     user.email = email;
+    user.firstName = firstName;
+    user.lastName = lastName;
     user.salt = await bcrypt.genSalt();
     user.password = await this.hashPassword(password, user.salt);
 
