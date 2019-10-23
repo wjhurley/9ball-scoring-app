@@ -1,20 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Team } from '../team/team.entity';
 
 @Entity('host_location')
-export class HostLocation {
-  @PrimaryGeneratedColumn({
-    type: 'int',
-  })
-  public id: number;
-
-  @Column({
-    length: 30,
-    nullable: false,
-  })
-  public name: string;
-
+export class HostLocation extends BaseEntity {
   @Column({
     length: 100,
     nullable: false,
@@ -28,17 +17,23 @@ export class HostLocation {
   public city: string;
 
   @Column({
-    length: 2,
+    default: () => 'CURRENT_TIMESTAMP',
+    name: 'created_at',
     nullable: false,
+    type: 'timestamptz',
   })
-  public state: string;
+  public createdAt: Date;
 
-  @Column({
-    name: 'zip_code',
-    nullable: false,
+  @PrimaryGeneratedColumn({
     type: 'int',
   })
-  public zipCode: number;
+  public id: number;
+
+  @Column({
+    length: 30,
+    nullable: false,
+  })
+  public name: string;
 
   @Column({
     name: 'phone_number',
@@ -50,12 +45,13 @@ export class HostLocation {
   public phoneNumber: number;
 
   @Column({
-    default: () => 'CURRENT_TIMESTAMP',
-    name: 'created_at',
+    length: 2,
     nullable: false,
-    type: 'timestamptz',
   })
-  public createdAt: Date;
+  public state: string;
+
+  @OneToMany(type => Team, team => team.hostLocation)
+  public teams: Team[];
 
   @Column({
     default: null,
@@ -65,6 +61,10 @@ export class HostLocation {
   })
   public updatedAt: Date;
 
-  @OneToMany(type => Team, team => team.hostLocation)
-  public teams: Team[];
+  @Column({
+    name: 'zip_code',
+    nullable: false,
+    type: 'int',
+  })
+  public zipCode: number;
 }

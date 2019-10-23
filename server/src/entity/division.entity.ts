@@ -1,20 +1,16 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 import { Team } from '../team/team.entity';
 
 @Entity()
-export class Division {
-  @PrimaryColumn({
-    nullable: false,
-    type: 'int',
-  })
-  public id: number;
-
+export class Division extends BaseEntity {
   @Column({
-    length: 25,
+    default: () => 'CURRENT_TIMESTAMP',
+    name: 'created_at',
     nullable: false,
+    type: 'timestamptz',
   })
-  public name: string;
+  public createdAt: Date;
 
   @Column({
     name: 'day_of_week',
@@ -29,13 +25,20 @@ export class Division {
   })
   public format: string;
 
-  @Column({
-    default: () => 'CURRENT_TIMESTAMP',
-    name: 'created_at',
+  @PrimaryColumn({
     nullable: false,
-    type: 'timestamptz',
+    type: 'int',
   })
-  public createdAt: Date;
+  public id: number;
+
+  @Column({
+    length: 25,
+    nullable: false,
+  })
+  public name: string;
+
+  @OneToMany(type => Team, team => team.division)
+  public teams: Team[];
 
   @Column({
     default: null,
@@ -44,7 +47,4 @@ export class Division {
     type: 'timestamptz',
   })
   public updatedAt: Date;
-
-  @OneToMany(type => Team, team => team.division)
-  public teams: Team[];
 }

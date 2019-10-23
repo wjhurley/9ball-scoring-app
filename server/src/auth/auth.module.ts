@@ -3,10 +3,10 @@ import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { getJwtModuleOptions } from '../jwtconfig';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
-import { getJwtModuleOptions } from '../jwtconfig';
 import { UserRepository } from './user.repository';
 
 const jwtConfig: JwtModuleOptions = getJwtModuleOptions();

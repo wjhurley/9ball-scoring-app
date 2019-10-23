@@ -1,29 +1,25 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 import { Match } from './match.entity';
 import { PlayerGame } from './player-game.entity';
 
 @Entity()
-export class Game {
-  @PrimaryGeneratedColumn({
-    type: 'int',
-  })
-  public id: number;
-
+export class Game extends BaseEntity {
   @Column({
-    name: 'start_time',
+    default: () => 'CURRENT_TIMESTAMP',
+    name: 'created_at',
     nullable: false,
-    type: 'time',
+    type: 'timestamptz',
   })
-  public startTime: Date;
-
-  @Column({
-    default: null,
-    name: 'end_time',
-    nullable: true,
-    type: 'time',
-  })
-  public endTime: Date;
+  public createdAt: Date;
 
   @Column({
     default: 0,
@@ -34,11 +30,33 @@ export class Game {
   public deadBalls: number;
 
   @Column({
+    default: null,
+    name: 'end_time',
+    nullable: true,
+    type: 'time',
+  })
+  public endTime: Date;
+
+  @PrimaryGeneratedColumn({
+    type: 'int',
+  })
+  public id: number;
+
+  @Column({
     default: 0,
     nullable: false,
     type: 'smallint',
   })
   public innings: number;
+
+  @ManyToOne(type => Match, match => match.games)
+  @JoinColumn({
+    name: 'match_id',
+  })
+  public matchId: Match;
+
+  @OneToMany(type => PlayerGame, playerGame => playerGame.gameId)
+  public players: PlayerGame[];
 
   @Column({
     default: false,
@@ -49,12 +67,11 @@ export class Game {
   public postSeason: boolean;
 
   @Column({
-    default: () => 'CURRENT_TIMESTAMP',
-    name: 'created_at',
+    name: 'start_time',
     nullable: false,
-    type: 'timestamptz',
+    type: 'time',
   })
-  public createdAt: Date;
+  public startTime: Date;
 
   @Column({
     default: null,
@@ -63,13 +80,4 @@ export class Game {
     type: 'timestamptz',
   })
   public updatedAt: Date;
-
-  @ManyToOne(type => Match, match => match.games)
-  @JoinColumn({
-    name: 'match_id',
-  })
-  public matchId: Match;
-
-  @OneToMany(type => PlayerGame, playerGame => playerGame.gameId)
-  public players: PlayerGame[];
 }
