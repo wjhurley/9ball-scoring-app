@@ -38,12 +38,13 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# Misc
+# Secret stuff
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+ormconfig.json
 
 # OS
 .DS_Store

@@ -10,6 +10,9 @@ interface EnvObject {
 }
 
 export interface OrmConfiguration extends BaseConnectionOptions {
+  cli: {
+    migrationsDir: string;
+  };
   database: string;
   entities: string[];
   host: string;
@@ -57,14 +60,17 @@ export class OrmConfig {
     const dbVariables: EnvObject = OrmConfig.getDesiredEnvVars(envVariables);
 
     return {
+      cli: {
+        migrationsDir: 'src/migration',
+      },
       database: 'break_n_score',
-      entities: [__dirname + '/../**/*.entity.js'],
+      entities: ['dist/**/*.entity.js', 'src/**/*.entity.ts'],
       host: 'localhost',
       logging: ['error'],
-      migrations: [__dirname + '/../**/*.migration.js'],
+      migrations: ['dist/migration/**/*.js', 'src/migration/**/*.ts'],
       password: dbVariables.POSTGRES_PASS,
       port: 5432,
-      subscribers: [__dirname + '/../**/*.subscriber.js'],
+      subscribers: ['dist/subscriber/**/*.js', 'src/subscriber/**/*.ts'],
       synchronize: true,
       type: 'postgres',
       username: dbVariables.POSTGRES_USER,

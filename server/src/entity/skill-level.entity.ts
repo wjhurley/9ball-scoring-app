@@ -19,6 +19,7 @@ export class SkillLevel extends BaseEntity {
   public players: Player[];
 
   @Column({
+    default: 0,
     name: 'points_required',
     nullable: false,
     type: 'smallint',
@@ -31,6 +32,13 @@ export class SkillLevel extends BaseEntity {
     type: 'smallint',
   })
   public skillLevel: number;
+
+  @Column({
+    default: 1,
+    nullable: false,
+    type: 'smallint',
+  })
+  public timeouts: number;
 
   @Column({
     default: 1,
