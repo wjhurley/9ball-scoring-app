@@ -49,6 +49,8 @@ export class OrmConfig {
   }
 
   public static setConfig(): OrmConfiguration {
+    const folder = process.env.NODE_ENV !== 'development' ? 'src' : 'dist';
+    const fileExt = process.env.NODE_ENV !== 'development' ? 'ts' : 'js';
     const dotEnvFilePath = Path.resolve(__dirname, '../../.env');
     let dotEnv: Buffer | string = '';
 
@@ -64,13 +66,13 @@ export class OrmConfig {
         migrationsDir: 'src/migration',
       },
       database: 'break_n_score',
-      entities: ['dist/**/*.entity.js', 'src/**/*.entity.ts'],
+      entities: [`${folder}/**/*.entity.${fileExt}`],
       host: 'localhost',
-      logging: ['error'],
-      migrations: ['dist/migration/**/*.js', 'src/migration/**/*.ts'],
+      logging: 'all',
+      migrations: [`${folder}/migration/**/*.${fileExt}`],
       password: dbVariables.POSTGRES_PASS,
       port: 5432,
-      subscribers: ['dist/subscriber/**/*.js', 'src/subscriber/**/*.ts'],
+      subscribers: [`${folder}/subscriber/**/*.${fileExt}`],
       synchronize: true,
       type: 'postgres',
       username: dbVariables.POSTGRES_USER,
