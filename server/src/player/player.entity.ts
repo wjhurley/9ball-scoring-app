@@ -6,14 +6,17 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 
 import { User } from '../auth/user.entity';
 import { PlayerGame } from '../entity/player-game.entity';
 import { PlayerTeam } from '../entity/player-team.entity';
-import { SkillLevel } from '../entity/skill-level.entity';
+import { SkillLevel } from '../skill-level/skill-level.entity';
+import { PlayerFormat } from './player-format.enum';
 
 @Entity()
+@Unique('UQ_format_playerNumber', ['format', 'playerNumber'])
 export class Player extends BaseEntity {
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
@@ -24,10 +27,12 @@ export class Player extends BaseEntity {
   public createdAt: Date;
 
   @Column({
-    length: 20,
+    default: PlayerFormat.NINE,
+    enum: PlayerFormat,
     nullable: false,
+    type: 'enum',
   })
-  public format: string;
+  public format: PlayerFormat;
 
   @OneToMany(type => PlayerGame, playerGame => playerGame.playerId)
   public games: PlayerGame[];

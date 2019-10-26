@@ -1,14 +1,17 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+import { PlayerFormat } from '../player/player-format.enum';
 import { Player } from '../player/player.entity';
 
 @Entity('skill_level')
 export class SkillLevel extends BaseEntity {
   @Column({
-    length: 20,
+    default: PlayerFormat.NINE,
+    enum: PlayerFormat,
     nullable: false,
+    type: 'enum',
   })
-  public format: string;
+  public format: PlayerFormat;
 
   @PrimaryGeneratedColumn({
     type: 'int',

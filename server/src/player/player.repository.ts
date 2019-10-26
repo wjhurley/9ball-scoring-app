@@ -1,9 +1,9 @@
-import { InternalServerErrorException, Logger } from '@nestjs/common';
+import { ConflictException, InternalServerErrorException, Logger } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 
 import { User } from '../auth/user.entity';
 import { CreatePlayerDto } from './dto/create-player.dto';
-import { GetPlayerInfoDto } from './dto/get-player-info.dto';
+import { GetPlayersFilterDto } from './dto/get-players-filter.dto';
 import { Player } from './player.entity';
 
 @EntityRepository(Player)
@@ -16,26 +16,32 @@ export class PlayerRepository extends Repository<Player> {
     const player = new Player();
     player.playerNumber = playerNumber;
     player.format = format;
-    player.skillLevel = skillLevel;
     player.userId = user;
+    player.skillLevel = skillLevel;
 
     try {
       await player.save();
     } catch (error) {
       this.logger.error(
-        `Failed to create player info for user "${user.email}". Data: ${JSON.stringify(
+        `Failed to create player for user "${user.email}". Data: ${JSON.stringify(
           createPlayerDto,
         )}`,
         error.stack,
       );
-      throw new InternalServerErrorException();
+
+      if (error.code === '23505') {
+        throw new ConflictException('Player number/format combination already exists');
+      } else {
+        throw new InternalServerErrorException();
+      }
     }
 
     delete player.userId;
     return player;
   }
 
-  public async getPlayerInfo(format: GetPlayerInfoDto, user: User): Promise<Player[]> {
+  public async getPlayers(filterDto: GetPlayersFilterDto, user: User): Promise<Player[]> {
+    const { format } = filterDto;
     const query = this.createQueryBuilder('player');
 
     query.where('player.userId = :userId', { userId: user.id });
@@ -45,8 +51,7 @@ export class PlayerRepository extends Repository<Player> {
     }
 
     try {
-      const players = await query.getMany();
-      return players;
+      return await query.getMany();
     } catch (error) {
       this.logger.error(
         `Failed to get player info for user "${user.email}". Format: ${JSON.stringify(format)}`,

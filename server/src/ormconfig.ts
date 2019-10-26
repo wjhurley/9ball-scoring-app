@@ -68,7 +68,7 @@ export class OrmConfig {
       database: 'break_n_score',
       entities: [`${folder}/**/*.entity.${fileExt}`],
       host: 'localhost',
-      logging: 'all',
+      logging: ['error'],
       migrations: [`${folder}/migration/**/*.${fileExt}`],
       password: dbVariables.POSTGRES_PASS,
       port: 5432,
