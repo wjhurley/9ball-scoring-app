@@ -36,7 +36,7 @@ export class PlayerRepository extends Repository<Player> {
       }
     }
 
-    delete player.userId;
+    // delete player.userId; // doesn't work with TS 4.0.2
     return player;
   }
 

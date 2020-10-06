@@ -1,20 +1,27 @@
 import { Module } from '@nestjs/common';
-import { JwtModule, JwtModuleOptions } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { getJwtModuleOptions } from '../jwtconfig';
+import { AppConfigModule } from '../config/app/config.module';
+import { AppConfigService } from '../config/app/config.service';
+import { JwtConfigService } from '../config/jwt-config.service';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
 import { UserRepository } from './user.repository';
 
-const jwtConfig: JwtModuleOptions = getJwtModuleOptions();
+const configService = new ConfigService();
+const appConfigService = new AppConfigService(configService);
+const jwtConfigService = new JwtConfigService(appConfigService);
+const jwtConfig = jwtConfigService.getJwtModuleOptions();
 
 @Module({
   controllers: [AuthController],
   exports: [JwtStrategy, PassportModule],
   imports: [
+    AppConfigModule,
     JwtModule.register(jwtConfig),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     TypeOrmModule.forFeature([UserRepository]),
