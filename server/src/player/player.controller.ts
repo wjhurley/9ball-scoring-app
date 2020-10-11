@@ -44,6 +44,7 @@ export class PlayerController {
 
   @Delete('/:id')
   public deletePlayer(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
+    this.logger.verbose(`User "${user.email}" deleting a player. Player: ${id}`);
     return this.playerService.deletePlayer(id, user);
   }
 

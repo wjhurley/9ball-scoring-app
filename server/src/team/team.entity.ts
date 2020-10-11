@@ -8,8 +8,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import { Division } from '../entity/division.entity';
-import { HostLocation } from '../entity/host-location.entity';
+import { Division } from '../division/division.entity';
+import { HostLocation } from '../host-location/host-location.entity';
 import { PlayerTeam } from '../entity/player-team.entity';
 import { TeamMatch } from '../entity/team-match.entity';
 

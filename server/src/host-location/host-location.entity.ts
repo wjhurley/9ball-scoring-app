@@ -1,8 +1,9 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 import { Team } from '../team/team.entity';
 
 @Entity('host_location')
+@Unique('UQ_address_name_phoneNumber', ['address', 'name', 'phoneNumber'])
 export class HostLocation extends BaseEntity {
   @Column({
     length: 100,

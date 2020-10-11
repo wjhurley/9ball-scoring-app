@@ -1,6 +1,8 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+import { PlayerFormat } from '../player/player-format.enum';
 import { Team } from '../team/team.entity';
+import { DayOfWeek } from './day-of-week.enum';
 
 @Entity()
 export class Division extends BaseEntity {
@@ -13,20 +15,23 @@ export class Division extends BaseEntity {
   public createdAt: Date;
 
   @Column({
+    default: DayOfWeek.SUNDAY,
+    enum: DayOfWeek,
     name: 'day_of_week',
     nullable: false,
-    type: 'smallint',
+    type: 'enum',
   })
-  public dayOfWeek: number;
+  public dayOfWeek: DayOfWeek;
 
   @Column({
-    length: 20,
+    default: PlayerFormat.NINE,
+    enum: PlayerFormat,
     nullable: false,
+    type: 'enum',
   })
-  public format: string;
+  public format: PlayerFormat;
 
-  @PrimaryColumn({
-    nullable: false,
+  @PrimaryGeneratedColumn({
     type: 'int',
   })
   public id: number;

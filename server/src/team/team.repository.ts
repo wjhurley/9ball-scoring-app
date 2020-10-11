@@ -30,8 +30,8 @@ export class TeamRepository extends Repository<Team> {
     return team;
   }
 
-  public async getTeams(filterDto: GetTeamsFilterDto, user: User): Promise<Team[]> {
-    const { division } = filterDto;
+  public async getTeams(getTeamsFilterDto: GetTeamsFilterDto, user: User): Promise<Team[]> {
+    const { division } = getTeamsFilterDto;
     const query = this.createQueryBuilder('team');
 
     if (division) {
@@ -39,11 +39,12 @@ export class TeamRepository extends Repository<Team> {
     }
 
     try {
-      const teams = await query.getMany();
-      return teams;
+      return await query.getMany();
     } catch (error) {
       this.logger.error(
-        `Failed to get teams for user "${user.email}". Filters: ${JSON.stringify(filterDto)}`,
+        `Failed to get teams for user "${user.email}". Filters: ${JSON.stringify(
+          getTeamsFilterDto,
+        )}`,
         error.stack,
       );
       throw new InternalServerErrorException();

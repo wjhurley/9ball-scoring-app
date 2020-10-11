@@ -1,4 +1,9 @@
-import { ConflictException, InternalServerErrorException, Logger } from '@nestjs/common';
+import {
+  ConflictException,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 
 import { User } from '../auth/user.entity';
@@ -14,10 +19,10 @@ export class PlayerRepository extends Repository<Player> {
     const { playerNumber, format, skillLevel } = createPlayerDto;
 
     const player = new Player();
-    player.playerNumber = playerNumber;
     player.format = format;
-    player.userId = user;
+    player.playerNumber = playerNumber;
     player.skillLevel = skillLevel;
+    player.userId = user;
 
     try {
       await player.save();
@@ -57,7 +62,7 @@ export class PlayerRepository extends Repository<Player> {
         `Failed to get player info for user "${user.email}". Format: ${JSON.stringify(format)}`,
         error.stack,
       );
-      throw new InternalServerErrorException();
+      throw new NotFoundException();
     }
   }
 }

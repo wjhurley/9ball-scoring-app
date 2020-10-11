@@ -21,7 +21,7 @@ export class PlayerService {
 
   public async createPlayer(createPlayerDto: CreatePlayerDto, user: User): Promise<Player> {
     const { format, skillLevel } = createPlayerDto;
-    const initialSkillLevel = await this.skillLevelRepository.findSkillLevel({
+    const initialSkillLevel = await this.skillLevelRepository.getSkillLevel({
       format,
       skillLevel,
     });
@@ -64,7 +64,7 @@ export class PlayerService {
   ): Promise<Player> {
     const { format, skillLevel } = updatePlayerSkillLevelDto;
     const player = await this.getPlayerById(id, user);
-    const newSkillLevel = await this.skillLevelRepository.findSkillLevel(updatePlayerSkillLevelDto);
+    const newSkillLevel = await this.skillLevelRepository.getSkillLevel(updatePlayerSkillLevelDto);
 
     if (_.isUndefined(newSkillLevel)) {
       throw new NotFoundException(`Skill level "${skillLevel}" not valid for format "${format}"`);
