@@ -65,7 +65,9 @@ export class HostLocation extends BaseEntity {
   @Column({
     name: 'zip_code',
     nullable: false,
-    type: 'int',
+    precision: 5,
+    scale: 0,
+    type: 'numeric',
   })
   public zipCode: number;
 }
