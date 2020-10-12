@@ -17,11 +17,11 @@ import { AuthGuard } from '@nestjs/passport';
 
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
+import { Division } from './division.entity';
+import { DivisionService } from './division.service';
 import { CreateDivisionDto } from './dto/create-division.dto';
 import { GetDivisionsFilterDto } from './dto/get-divisions-filter.dto';
 import { UpdateDivisionDto } from './dto/update-division.dto';
-import { Division } from './division.entity';
-import { DivisionService } from './division.service';
 
 @Controller('api/division')
 @UseGuards(AuthGuard())
@@ -67,10 +67,11 @@ export class DivisionController {
     return this.divisionService.getDivisions(filterDto);
   }
 
-  @Patch('/:id/skill-level')
+  @Patch('/:id')
   public updateDivision(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateDivisionDto: UpdateDivisionDto,
+    @GetUser() user: User,
   ): Promise<Division> {
     return this.divisionService.updateDivision(id, updateDivisionDto);
   }
