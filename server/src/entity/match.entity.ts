@@ -8,8 +8,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+import { Session } from '../session/session.entity';
 import { Game } from './game.entity';
-import { Session } from './session.entity';
 import { TeamMatch } from './team-match.entity';
 
 @Entity()
