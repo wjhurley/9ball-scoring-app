@@ -6,14 +6,17 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 
 import { Division } from '../division/division.entity';
-import { HostLocation } from '../host-location/host-location.entity';
 import { PlayerTeam } from '../entity/player-team.entity';
 import { TeamMatch } from '../entity/team-match.entity';
+import { HostLocation } from '../host-location/host-location.entity';
+import { PlayerFormat } from '../player/player-format.enum';
 
 @Entity()
+@Unique('UQ_division_format_teamName', ['division', 'format', 'teamName'])
 export class Team extends BaseEntity {
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
@@ -28,6 +31,14 @@ export class Team extends BaseEntity {
     name: 'division',
   })
   public division: Division;
+
+  @Column({
+    default: PlayerFormat.NINE,
+    enum: PlayerFormat,
+    nullable: false,
+    type: 'enum',
+  })
+  public format: PlayerFormat;
 
   @ManyToOne(type => HostLocation, hostLocation => hostLocation.teams)
   @JoinColumn({

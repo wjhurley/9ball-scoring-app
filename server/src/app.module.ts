@@ -10,6 +10,7 @@ import { DivisionModule } from './division/division.module';
 import { HostLocationModule } from './host-location/host-location.module';
 import { PlayerModule } from './player/player.module';
 import { SessionModule } from './session/session.module';
+import { TeamModule } from './team/team.module';
 
 const configService = new ConfigService();
 const appConfigService = new AppConfigService(configService);
@@ -24,6 +25,7 @@ const configSettings = ormConfigService.getConfig();
     HostLocationModule,
     PlayerModule,
     SessionModule,
+    TeamModule,
     TypeOrmModule.forRoot(configSettings),
   ],
 })
