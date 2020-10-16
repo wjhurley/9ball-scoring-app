@@ -31,6 +31,20 @@ export class DivisionRepository extends Repository<Division> {
     return division;
   }
 
+  public async getDivision(division: Division): Promise<Division | undefined> {
+    try {
+      return await this.createQueryBuilder('division')
+        .where('division.id = :id', { id: division })
+        .getOne();
+    } catch (error) {
+      this.logger.error(
+        `Failed to get division info. Arguments: ${JSON.stringify(division)}`,
+        error.stack,
+      );
+      throw new NotFoundException();
+    }
+  }
+
   public async getDivisions(getDivisionsDto: GetDivisionsFilterDto): Promise<Division[]> {
     const { dayOfWeek, format } = getDivisionsDto;
     const query = this.createQueryBuilder('division');

@@ -6,6 +6,8 @@ import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 
+export const duplicateEntryErrorCode = '23505';
+
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   private async hashPassword(password: string, salt: string): Promise<string> {
@@ -13,7 +15,6 @@ export class UserRepository extends Repository<User> {
   }
 
   public async signUp(createUserDto: CreateUserDto): Promise<void> {
-    const duplicateUserErrorCode = '23505';
     const { email, firstName, lastName, password } = createUserDto;
 
     const user = new User();
@@ -26,7 +27,7 @@ export class UserRepository extends Repository<User> {
     try {
       await user.save();
     } catch (error) {
-      if (error.code === duplicateUserErrorCode) {
+      if (error.code === duplicateEntryErrorCode) {
         throw new ConflictException('Email already exists');
       } else {
         throw new InternalServerErrorException();

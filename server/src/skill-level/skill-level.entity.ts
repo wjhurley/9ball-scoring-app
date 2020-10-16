@@ -1,9 +1,10 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 import { PlayerFormat } from '../player/player-format.enum';
 import { Player } from '../player/player.entity';
 
 @Entity('skill_level')
+@Unique('UQ_format_skillLevel', ['format', 'skillLevel'])
 export class SkillLevel extends BaseEntity {
   @Column({
     default: PlayerFormat.NINE,

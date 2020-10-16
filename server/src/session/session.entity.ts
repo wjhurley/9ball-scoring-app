@@ -17,7 +17,7 @@ export class Session extends BaseEntity {
   })
   public id: number;
 
-  @OneToMany(type => Match, match => match.session)
+  @OneToMany(type => Match, match => match.sessionId)
   public matches: Match[];
 
   @Column({

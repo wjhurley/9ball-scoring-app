@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 
+import { duplicateEntryErrorCode } from '../auth/user.repository';
 import { CreateHostLocationDto } from './dto/create-host-location.dto';
 import { GetHostLocationsFilterDto } from './dto/get-host-locations-filter.dto';
 import { HostLocation } from './host-location.entity';
@@ -35,7 +36,7 @@ export class HostLocationRepository extends Repository<HostLocation> {
         error.stack,
       );
 
-      if (error.code === '23505') {
+      if (error.code === duplicateEntryErrorCode) {
         throw new ConflictException('Host Location already exists');
       } else {
         throw new InternalServerErrorException();
@@ -43,6 +44,20 @@ export class HostLocationRepository extends Repository<HostLocation> {
     }
 
     return hostLocation;
+  }
+
+  public async getHostLocation(hostLocation: HostLocation): Promise<HostLocation | undefined> {
+    try {
+      return await this.createQueryBuilder('host_location')
+        .where('host_location.id = :id', { id: hostLocation })
+        .getOne();
+    } catch (error) {
+      this.logger.error(
+        `Failed to get host location info. Arguments: ${JSON.stringify(hostLocation)}`,
+        error.stack,
+      );
+      throw new NotFoundException();
+    }
   }
 
   public async getHostLocations(

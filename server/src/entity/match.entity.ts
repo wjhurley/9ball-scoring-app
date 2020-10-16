@@ -56,9 +56,9 @@ export class Match extends BaseEntity {
 
   @ManyToOne(type => Session, session => session.matches)
   @JoinColumn({
-    name: 'session',
+    name: 'session_id',
   })
-  public session: Session;
+  public sessionId: Session;
 
   @Column({
     name: 'start_time',

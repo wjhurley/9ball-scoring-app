@@ -7,6 +7,7 @@ import {
 import { EntityRepository, Repository } from 'typeorm';
 
 import { User } from '../auth/user.entity';
+import { duplicateEntryErrorCode } from '../auth/user.repository';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { GetPlayersFilterDto } from './dto/get-players-filter.dto';
 import { Player } from './player.entity';
@@ -34,14 +35,13 @@ export class PlayerRepository extends Repository<Player> {
         error.stack,
       );
 
-      if (error.code === '23505') {
+      if (error.code === duplicateEntryErrorCode) {
         throw new ConflictException('Player number/format combination already exists');
       } else {
         throw new InternalServerErrorException();
       }
     }
 
-    // delete player.userId; // doesn't work with TS 4.0.2
     return player;
   }
 
