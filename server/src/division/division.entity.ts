@@ -1,10 +1,11 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
 
 import { PlayerFormat } from '../player/player-format.enum';
 import { Team } from '../team/team.entity';
 import { DayOfWeek } from './day-of-week.enum';
 
 @Entity()
+@Unique('UQ_dayOfWeek_name', ['dayOfWeek', 'name'])
 export class Division extends BaseEntity {
   @Column({
     default: () => 'CURRENT_TIMESTAMP',

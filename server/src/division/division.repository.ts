@@ -1,6 +1,12 @@
-import { InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  InternalServerErrorException,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 
+import { duplicateEntryErrorCode } from '../auth/user.repository';
 import { Division } from './division.entity';
 import { CreateDivisionDto } from './dto/create-division.dto';
 import { GetDivisionsFilterDto } from './dto/get-divisions-filter.dto';
@@ -25,7 +31,11 @@ export class DivisionRepository extends Repository<Division> {
         error.stack,
       );
 
-      throw new InternalServerErrorException();
+      if (error.code === duplicateEntryErrorCode) {
+        throw new ConflictException('Division name already exists for day of the week');
+      } else {
+        throw new InternalServerErrorException();
+      }
     }
 
     return division;
