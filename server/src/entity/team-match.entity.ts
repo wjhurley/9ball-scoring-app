@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
+import { Match } from '../match/match.entity';
 import { Team } from '../team/team.entity';
-import { Match } from './match.entity';
 
 @Entity('team_match')
 export class TeamMatch extends BaseEntity {

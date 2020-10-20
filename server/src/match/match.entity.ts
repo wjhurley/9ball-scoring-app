@@ -9,8 +9,8 @@ import {
 } from 'typeorm';
 
 import { Session } from '../session/session.entity';
-import { Game } from './game.entity';
-import { TeamMatch } from './team-match.entity';
+import { Game } from '../game/game.entity';
+import { TeamMatch } from '../entity/team-match.entity';
 
 @Entity()
 export class Match extends BaseEntity {
@@ -30,7 +30,9 @@ export class Match extends BaseEntity {
   })
   public endTime: Date;
 
-  @OneToMany(type => Game, game => game.matchId)
+  @OneToMany(type => Game, game => game.matchId, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public games: Game[];
 
   @PrimaryGeneratedColumn({
@@ -67,7 +69,9 @@ export class Match extends BaseEntity {
   })
   public startTime: Date;
 
-  @OneToMany(type => TeamMatch, teamMatch => teamMatch.matchId)
+  @OneToMany(type => TeamMatch, teamMatch => teamMatch.matchId, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public teams: TeamMatch[];
 
   @Column({

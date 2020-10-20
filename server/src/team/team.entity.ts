@@ -51,10 +51,14 @@ export class Team extends BaseEntity {
   })
   public id: number;
 
-  @OneToMany(type => TeamMatch, teamMatch => teamMatch.teamId)
+  @OneToMany(type => TeamMatch, teamMatch => teamMatch.teamId, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public matches: TeamMatch[];
 
-  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.teamId)
+  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.teamId, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public players: PlayerTeam[];
 
   @Column({

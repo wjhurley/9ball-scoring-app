@@ -51,7 +51,9 @@ export class HostLocation extends BaseEntity {
   })
   public state: string;
 
-  @OneToMany(type => Team, team => team.hostLocation)
+  @OneToMany(type => Team, team => team.hostLocation, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public teams: Team[];
 
   @Column({

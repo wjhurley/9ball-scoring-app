@@ -19,7 +19,9 @@ export class SkillLevel extends BaseEntity {
   })
   public id: number;
 
-  @OneToMany(type => Player, player => player.skillLevel)
+  @OneToMany(type => Player, player => player.skillLevel, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public players: Player[];
 
   @Column({

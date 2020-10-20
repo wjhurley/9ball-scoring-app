@@ -34,7 +34,9 @@ export class Player extends BaseEntity {
   })
   public format: PlayerFormat;
 
-  @OneToMany(type => PlayerGame, playerGame => playerGame.playerId)
+  @OneToMany(type => PlayerGame, playerGame => playerGame.playerId, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public games: PlayerGame[];
 
   @PrimaryGeneratedColumn({
@@ -55,7 +57,9 @@ export class Player extends BaseEntity {
   })
   public skillLevel: SkillLevel;
 
-  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.playerId)
+  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.playerId, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public teams: PlayerTeam[];
 
   @Column({

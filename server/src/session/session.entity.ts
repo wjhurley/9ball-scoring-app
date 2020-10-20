@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { Match } from '../entity/match.entity';
+import { Match } from '../match/match.entity';
 
 @Entity()
 export class Session extends BaseEntity {
@@ -17,7 +17,9 @@ export class Session extends BaseEntity {
   })
   public id: number;
 
-  @OneToMany(type => Match, match => match.sessionId)
+  @OneToMany(type => Match, match => match.sessionId, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public matches: Match[];
 
   @Column({

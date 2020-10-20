@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
+import { Game } from '../game/game.entity';
 import { Player } from '../player/player.entity';
-import { Game } from './game.entity';
 
 @Entity('player_game')
 export class PlayerGame extends BaseEntity {

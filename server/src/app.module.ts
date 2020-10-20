@@ -7,7 +7,9 @@ import { AppConfigModule } from './config/app/config.module';
 import { AppConfigService } from './config/app/config.service';
 import { OrmConfigService } from './config/orm-config.service';
 import { DivisionModule } from './division/division.module';
+import { GameModule } from './game/game.module';
 import { HostLocationModule } from './host-location/host-location.module';
+import { MatchModule } from './match/match.module';
 import { PlayerModule } from './player/player.module';
 import { SessionModule } from './session/session.module';
 import { TeamModule } from './team/team.module';
@@ -22,7 +24,9 @@ const configSettings = ormConfigService.getConfig();
     AppConfigModule,
     AuthModule,
     DivisionModule,
+    GameModule,
     HostLocationModule,
+    MatchModule,
     PlayerModule,
     SessionModule,
     TeamModule,

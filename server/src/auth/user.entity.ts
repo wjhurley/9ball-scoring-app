@@ -45,7 +45,9 @@ export class User extends BaseEntity {
   })
   public password: string;
 
-  @OneToMany(type => Player, player => player.userId)
+  @OneToMany(type => Player, player => player.userId, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public players: Player[];
 
   @Column({

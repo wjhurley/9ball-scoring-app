@@ -8,8 +8,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import { Match } from './match.entity';
-import { PlayerGame } from './player-game.entity';
+import { Match } from '../match/match.entity';
+import { PlayerGame } from '../entity/player-game.entity';
 
 @Entity()
 export class Game extends BaseEntity {
@@ -55,7 +55,9 @@ export class Game extends BaseEntity {
   })
   public matchId: Match;
 
-  @OneToMany(type => PlayerGame, playerGame => playerGame.gameId)
+  @OneToMany(type => PlayerGame, playerGame => playerGame.gameId, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public players: PlayerGame[];
 
   @Column({

@@ -43,7 +43,9 @@ export class Division extends BaseEntity {
   })
   public name: string;
 
-  @OneToMany(type => Team, team => team.division)
+  @OneToMany(type => Team, team => team.division, {
+    cascade: ['insert', 'update', 'remove'],
+  })
   public teams: Team[];
 
   @Column({
