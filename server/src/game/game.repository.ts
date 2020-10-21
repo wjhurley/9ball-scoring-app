@@ -34,9 +34,7 @@ export class GameRepository extends Repository<Game> {
 
   public async getGame(game: Game): Promise<Game | undefined> {
     try {
-      return await this.createQueryBuilder('game')
-        .where('game.id = :id', { id: game })
-        .getOne();
+      return await this.createQueryBuilder('game').where('game.id = :id', { id: game }).getOne();
     } catch (error) {
       this.logger.error(`Failed to get game info. Arguments: ${JSON.stringify(game)}`, error.stack);
       throw new NotFoundException();

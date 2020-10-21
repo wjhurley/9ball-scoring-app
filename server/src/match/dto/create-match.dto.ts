@@ -11,6 +11,7 @@ export class CreateMatchDto {
   @IsNotEmpty()
   postSeason: boolean;
 
+  @IsInt()
   @IsNotEmpty()
   sessionId: Session;
 

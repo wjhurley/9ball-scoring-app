@@ -62,6 +62,7 @@ export class GameController {
   }
 
   @Patch('/:id')
+  @UsePipes(ValidationPipe)
   public updateGame(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateGameDto: UpdateGameDto,

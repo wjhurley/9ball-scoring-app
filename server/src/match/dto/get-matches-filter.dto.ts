@@ -1,5 +1,6 @@
-import { IsBoolean, IsInt, IsISO8601, IsOptional } from 'class-validator';
+import { IsISO8601, IsNumberString, IsOptional } from 'class-validator';
 
+import { IsBooleanString } from '../../lib/custom.validator';
 import { Session } from '../../session/session.entity';
 
 export class GetMatchesFilterDto {
@@ -7,14 +8,15 @@ export class GetMatchesFilterDto {
   @IsOptional()
   matchDate: Date;
 
-  @IsBoolean()
+  @IsBooleanString()
   @IsOptional()
   postSeason: boolean;
 
+  @IsNumberString()
   @IsOptional()
   sessionId: Session;
 
-  @IsInt()
+  @IsNumberString()
   @IsOptional()
   weekNumber: number;
 }

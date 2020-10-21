@@ -15,6 +15,7 @@ export class UpdateGameDto {
   @IsOptional()
   innings: number;
 
+  @IsInt()
   @IsOptional()
   matchId: Match;
 

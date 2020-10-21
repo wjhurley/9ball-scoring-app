@@ -65,6 +65,7 @@ export class MatchController {
   }
 
   @Patch('/:id')
+  @UsePipes(ValidationPipe)
   public updateMatch(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateMatchDto: UpdateMatchDto,

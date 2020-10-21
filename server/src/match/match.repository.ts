@@ -34,9 +34,7 @@ export class MatchRepository extends Repository<Match> {
 
   public async getMatch(match: Match): Promise<Match | undefined> {
     try {
-      return await this.createQueryBuilder('match')
-        .where('match.id = :id', { id: match })
-        .getOne();
+      return await this.createQueryBuilder('match').where('match.id = :id', { id: match }).getOne();
     } catch (error) {
       this.logger.error(
         `Failed to get match info. Arguments: ${JSON.stringify(match)}`,

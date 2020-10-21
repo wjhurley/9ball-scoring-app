@@ -68,6 +68,7 @@ export class PlayerController {
   }
 
   @Patch('/:id/skill-level')
+  @UsePipes(ValidationPipe)
   public updatePlayerSkillLevel(
     @Param('id', ParseIntPipe) id: number,
     @Body() updatePlayerSkillLevelDto: UpdatePlayerSkillLevelDto,

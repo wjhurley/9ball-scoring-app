@@ -4,7 +4,6 @@ import { PlayerFormat } from '../../player/player-format.enum';
 import { DayOfWeek } from '../day-of-week.enum';
 
 export class CreateDivisionDto {
-  @IsNotEmpty()
   @IsIn([
     DayOfWeek.SUNDAY,
     DayOfWeek.MONDAY,
@@ -14,10 +13,11 @@ export class CreateDivisionDto {
     DayOfWeek.FRIDAY,
     DayOfWeek.SATURDAY,
   ])
+  @IsNotEmpty()
   public dayOfWeek: DayOfWeek;
 
-  @IsNotEmpty()
   @IsIn([PlayerFormat.EIGHT, PlayerFormat.NINE])
+  @IsNotEmpty()
   public format: PlayerFormat;
 
   @IsNotEmpty()

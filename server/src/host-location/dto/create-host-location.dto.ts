@@ -1,4 +1,6 @@
-import { IsInt, IsNotEmpty, IsString, Length, Max, Min } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString, Length } from 'class-validator';
+
+import { NumberLength } from '../../lib/custom.validator';
 
 export class CreateHostLocationDto {
   @IsNotEmpty()
@@ -18,18 +20,16 @@ export class CreateHostLocationDto {
 
   @IsInt()
   @IsNotEmpty()
-  @Min(1000000000)
-  @Max(9999999999)
+  @NumberLength(10)
   public phoneNumber: number;
 
   @IsNotEmpty()
   @IsString()
-  @Length(2)
+  @Length(2, 2)
   public state: string;
 
   @IsInt()
   @IsNotEmpty()
-  @Min(0)
-  @Max(99999)
+  @NumberLength(5)
   public zipCode: number;
 }

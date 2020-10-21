@@ -1,11 +1,12 @@
-import { IsInt, IsOptional, IsString } from 'class-validator';
+import { IsNumberString, IsOptional, IsString, Length } from 'class-validator';
 
 export class GetSessionsFilterDto {
   @IsOptional()
   @IsString()
   public name: string;
 
-  @IsInt()
+  @IsNumberString()
   @IsOptional()
+  @Length(4, 4)
   public year: number;
 }

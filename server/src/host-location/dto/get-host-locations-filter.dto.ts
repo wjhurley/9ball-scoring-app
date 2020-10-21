@@ -1,4 +1,4 @@
-import { IsInt, IsOptional, IsString, Length } from 'class-validator';
+import { IsNumberString, IsOptional, IsString, Length } from 'class-validator';
 
 export class GetHostLocationsFilterDto {
   @IsOptional()
@@ -9,8 +9,8 @@ export class GetHostLocationsFilterDto {
   @IsString()
   public name: string;
 
-  @IsInt()
+  @IsNumberString()
   @IsOptional()
-  @Length(10)
+  @Length(10, 10)
   public phoneNumber: number;
 }

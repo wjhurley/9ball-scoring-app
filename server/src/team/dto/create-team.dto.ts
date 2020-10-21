@@ -5,6 +5,7 @@ import { HostLocation } from '../../host-location/host-location.entity';
 import { PlayerFormat } from '../../player/player-format.enum';
 
 export class CreateTeamDto {
+  @IsInt()
   @IsNotEmpty()
   public division: Division;
 
@@ -12,6 +13,7 @@ export class CreateTeamDto {
   @IsNotEmpty()
   public format: PlayerFormat;
 
+  @IsInt()
   @IsNotEmpty()
   public hostLocation: HostLocation;
 

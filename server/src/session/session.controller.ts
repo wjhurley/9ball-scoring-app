@@ -68,6 +68,7 @@ export class SessionController {
   }
 
   @Patch('/:id')
+  @UsePipes(ValidationPipe)
   public updateSession(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateSessionDto: UpdateSessionDto,

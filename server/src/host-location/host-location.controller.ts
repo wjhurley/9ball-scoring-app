@@ -70,6 +70,7 @@ export class HostLocationController {
   }
 
   @Patch('/:id')
+  @UsePipes(ValidationPipe)
   public updateHostLocation(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateHostLocationDto: UpdateHostLocationDto,

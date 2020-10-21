@@ -12,6 +12,7 @@ export class CreatePlayerDto {
   @IsNotEmpty()
   public playerNumber: number;
 
+  @IsInt()
   @IsNotEmpty()
   public skillLevel: SkillLevel;
 }

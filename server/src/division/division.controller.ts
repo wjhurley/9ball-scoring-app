@@ -70,7 +70,7 @@ export class DivisionController {
   @Patch('/:id')
   public updateDivision(
     @Param('id', ParseIntPipe) id: number,
-    @Body() updateDivisionDto: UpdateDivisionDto,
+    @Body(ValidationPipe) updateDivisionDto: UpdateDivisionDto,
     @GetUser() user: User,
   ): Promise<Division> {
     return this.divisionService.updateDivision(id, updateDivisionDto);

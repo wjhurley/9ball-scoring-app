@@ -1,4 +1,6 @@
-import { IsInt, IsOptional, IsString, Length, Max, Min } from 'class-validator';
+import { IsInt, IsOptional, IsString, Length } from 'class-validator';
+
+import { NumberLength } from '../../lib/custom.validator';
 
 export class UpdateHostLocationDto {
   @IsOptional()
@@ -18,18 +20,16 @@ export class UpdateHostLocationDto {
 
   @IsInt()
   @IsOptional()
-  @Min(1000000000)
-  @Max(9999999999)
+  @NumberLength(10)
   public phoneNumber: number;
 
   @IsOptional()
   @IsString()
-  @Length(2)
+  @Length(2, 2)
   public state: string;
 
   @IsInt()
   @IsOptional()
-  @Min(0)
-  @Max(99999)
+  @NumberLength(5)
   public zipCode: number;
 }

@@ -15,6 +15,7 @@ export class UpdateMatchDto {
   @IsOptional()
   postSeason: boolean;
 
+  @IsInt()
   @IsOptional()
   sessionId: Session;
 
