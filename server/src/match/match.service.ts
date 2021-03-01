@@ -42,13 +42,13 @@ export class MatchService {
   }
 
   public async updateMatch(id: number, updateMatchDto: UpdateMatchDto): Promise<Match> {
-    const { endTime, matchDate, postSeason, sessionId, startTime, weekNumber } = updateMatchDto;
+    const { endTime, matchDate, postSeason, session, startTime, weekNumber } = updateMatchDto;
     const match = await this.getMatchById(id);
 
     match.endTime = endTime || match.endTime;
     match.matchDate = matchDate || match.matchDate;
     match.postSeason = postSeason || match.postSeason;
-    match.sessionId = sessionId || match.sessionId;
+    match.session = session || match.session;
     match.startTime = startTime || match.startTime;
     match.weekNumber = weekNumber || match.weekNumber;
     match.updatedAt = new Date(Date.now());

@@ -1,9 +1,18 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 
 import { Match } from '../match/match.entity';
 import { Team } from '../team/team.entity';
 
 @Entity('team_match')
+@Unique('UQ_match_team', ['match', 'team'])
 export class TeamMatch extends BaseEntity {
   @Column({
     default: () => 'CURRENT_TIMESTAMP',
@@ -28,17 +37,22 @@ export class TeamMatch extends BaseEntity {
   })
   public homeTeam: boolean;
 
-  @ManyToOne(type => Match, match => match.teams, { primary: true })
-  @JoinColumn({
-    name: 'match_id',
+  @PrimaryGeneratedColumn({
+    type: 'int',
   })
-  public matchId: Match;
+  public id: number;
 
-  @ManyToOne(type => Team, team => team.matches, { primary: true })
+  @ManyToOne(type => Match, match => match.teams)
   @JoinColumn({
-    name: 'team_id',
+    name: 'match',
   })
-  public teamId: Team;
+  public match: Match;
+
+  @ManyToOne(type => Team, team => team.matches)
+  @JoinColumn({
+    name: 'team',
+  })
+  public team: Team;
 
   @Column({
     default: null,

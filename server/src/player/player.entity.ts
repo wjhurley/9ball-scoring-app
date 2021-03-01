@@ -10,8 +10,8 @@ import {
 } from 'typeorm';
 
 import { User } from '../auth/user.entity';
-import { PlayerGame } from '../entity/player-game.entity';
-import { PlayerTeam } from '../entity/player-team.entity';
+import { PlayerGame } from '../player-game/player-game.entity';
+import { PlayerTeam } from '../player-team/player-team.entity';
 import { SkillLevel } from '../skill-level/skill-level.entity';
 import { PlayerFormat } from './player-format.enum';
 
@@ -34,7 +34,7 @@ export class Player extends BaseEntity {
   })
   public format: PlayerFormat;
 
-  @OneToMany(type => PlayerGame, playerGame => playerGame.playerId, {
+  @OneToMany(type => PlayerGame, playerGame => playerGame.player, {
     cascade: ['insert', 'update', 'remove'],
   })
   public games: PlayerGame[];
@@ -57,7 +57,7 @@ export class Player extends BaseEntity {
   })
   public skillLevel: SkillLevel;
 
-  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.playerId, {
+  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.player, {
     cascade: ['insert', 'update', 'remove'],
   })
   public teams: PlayerTeam[];
@@ -72,7 +72,7 @@ export class Player extends BaseEntity {
 
   @ManyToOne(type => User, user => user.players)
   @JoinColumn({
-    name: 'user_id',
+    name: 'user',
   })
-  public userId: User;
+  public user: User;
 }

@@ -17,7 +17,7 @@ export class UpdateGameDto {
 
   @IsInt()
   @IsOptional()
-  matchId: Match;
+  match: Match;
 
   @IsBoolean()
   @IsOptional()

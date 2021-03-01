@@ -13,7 +13,7 @@ export class CreateMatchDto {
 
   @IsInt()
   @IsNotEmpty()
-  sessionId: Session;
+  session: Session;
 
   @IsMilitaryTime()
   @IsNotEmpty()

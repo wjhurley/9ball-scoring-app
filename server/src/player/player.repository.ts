@@ -23,7 +23,7 @@ export class PlayerRepository extends Repository<Player> {
     player.format = format;
     player.playerNumber = playerNumber;
     player.skillLevel = skillLevel;
-    player.userId = user;
+    player.user = user;
 
     try {
       await player.save();
@@ -45,18 +45,30 @@ export class PlayerRepository extends Repository<Player> {
     return player;
   }
 
+  public async getPlayer(player: Player): Promise<Player | undefined> {
+    try {
+      return this.createQueryBuilder('player').where('player.id = :id', { id: player }).getOne();
+    } catch (error) {
+      this.logger.error(
+        `Failed to get player info. Arguments: ${JSON.stringify(player)}`,
+        error.stack,
+      );
+      throw new NotFoundException();
+    }
+  }
+
   public async getPlayers(filterDto: GetPlayersFilterDto, user: User): Promise<Player[]> {
     const { format } = filterDto;
     const query = this.createQueryBuilder('player');
 
-    query.where('player.userId = :userId', { userId: user.id });
+    query.where('player.user = :user', { user: user.id });
 
     if (format) {
       query.andWhere('player.format = :format', { format });
     }
 
     try {
-      return await query.getMany();
+      return query.getMany();
     } catch (error) {
       this.logger.error(
         `Failed to get player info for user "${user.email}". Format: ${JSON.stringify(format)}`,

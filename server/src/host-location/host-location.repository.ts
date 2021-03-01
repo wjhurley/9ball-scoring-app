@@ -48,7 +48,7 @@ export class HostLocationRepository extends Repository<HostLocation> {
 
   public async getHostLocation(hostLocation: HostLocation): Promise<HostLocation | undefined> {
     try {
-      return await this.createQueryBuilder('host_location')
+      return this.createQueryBuilder('host_location')
         .where('host_location.id = :id', { id: hostLocation })
         .getOne();
     } catch (error) {
@@ -75,7 +75,7 @@ export class HostLocationRepository extends Repository<HostLocation> {
     }
 
     try {
-      return await query.getMany();
+      return query.getMany();
     } catch (error) {
       this.logger.error(
         `Failed to get host location info. Arguments: ${JSON.stringify(getHostLocationsFilterDto)}`,

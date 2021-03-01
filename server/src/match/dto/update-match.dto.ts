@@ -17,7 +17,7 @@ export class UpdateMatchDto {
 
   @IsInt()
   @IsOptional()
-  sessionId: Session;
+  session: Session;
 
   @IsMilitaryTime()
   @IsOptional()

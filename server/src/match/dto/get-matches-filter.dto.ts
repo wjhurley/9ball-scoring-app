@@ -14,7 +14,7 @@ export class GetMatchesFilterDto {
 
   @IsNumberString()
   @IsOptional()
-  sessionId: Session;
+  session: Session;
 
   @IsNumberString()
   @IsOptional()

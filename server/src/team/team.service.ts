@@ -23,7 +23,7 @@ export class TeamService {
   ) {}
 
   public async createTeam(createTeamDto: CreateTeamDto, user: User): Promise<Team> {
-    const { division, format, hostLocation, teamName, teamNumber } = createTeamDto;
+    const { division, format, hostLocation } = createTeamDto;
     const relatedDivision = await this.divisionRepository.getDivision(division);
     const relatedHostLocation = await this.hostLocationRepository.getHostLocation(hostLocation);
 
@@ -42,10 +42,7 @@ export class TeamService {
     }
 
     createTeamDto.division = relatedDivision;
-    createTeamDto.format = format;
     createTeamDto.hostLocation = relatedHostLocation;
-    createTeamDto.teamName = teamName;
-    createTeamDto.teamNumber = teamNumber;
 
     return this.teamRepository.createTeam(createTeamDto, user);
   }

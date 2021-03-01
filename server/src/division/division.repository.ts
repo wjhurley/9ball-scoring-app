@@ -43,7 +43,7 @@ export class DivisionRepository extends Repository<Division> {
 
   public async getDivision(division: Division): Promise<Division | undefined> {
     try {
-      return await this.createQueryBuilder('division')
+      return this.createQueryBuilder('division')
         .where('division.id = :id', { id: division })
         .getOne();
     } catch (error) {
@@ -66,7 +66,7 @@ export class DivisionRepository extends Repository<Division> {
     }
 
     try {
-      return await query.getMany();
+      return query.getMany();
     } catch (error) {
       this.logger.error(
         `Failed to get division info. Arguments: ${JSON.stringify(getDivisionsDto)}`,

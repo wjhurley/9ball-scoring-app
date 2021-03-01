@@ -5,7 +5,7 @@ import { Match } from '../../match/match.entity';
 export class CreateGameDto {
   @IsInt()
   @IsNotEmpty()
-  matchId: Match;
+  match: Match;
 
   @IsBoolean()
   @IsNotEmpty()

@@ -1,9 +1,18 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 
 import { Player } from '../player/player.entity';
 import { Team } from '../team/team.entity';
 
 @Entity('player_team')
+@Unique('UQ_player_team', ['player', 'team'])
 export class PlayerTeam extends BaseEntity {
   @Column({
     default: false,
@@ -29,17 +38,22 @@ export class PlayerTeam extends BaseEntity {
   })
   public createdAt: Date;
 
-  @ManyToOne(type => Player, player => player.teams, { primary: true })
-  @JoinColumn({
-    name: 'player_id',
+  @PrimaryGeneratedColumn({
+    type: 'int',
   })
-  public playerId: Player;
+  public id: number;
 
-  @ManyToOne(type => Team, team => team.players, { primary: true })
+  @ManyToOne(type => Player, player => player.teams)
   @JoinColumn({
-    name: 'team_id',
+    name: 'player',
   })
-  public teamId: Team;
+  public player: Player;
+
+  @ManyToOne(type => Team, team => team.players)
+  @JoinColumn({
+    name: 'team',
+  })
+  public team: Team;
 
   @Column({
     default: null,

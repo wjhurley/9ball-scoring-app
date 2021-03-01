@@ -10,7 +10,7 @@ import {
 
 import { Session } from '../session/session.entity';
 import { Game } from '../game/game.entity';
-import { TeamMatch } from '../entity/team-match.entity';
+import { TeamMatch } from '../team-match/team-match.entity';
 
 @Entity()
 export class Match extends BaseEntity {
@@ -30,7 +30,7 @@ export class Match extends BaseEntity {
   })
   public endTime: Date;
 
-  @OneToMany(type => Game, game => game.matchId, {
+  @OneToMany(type => Game, game => game.match, {
     cascade: ['insert', 'update', 'remove'],
   })
   public games: Game[];
@@ -58,9 +58,9 @@ export class Match extends BaseEntity {
 
   @ManyToOne(type => Session, session => session.matches)
   @JoinColumn({
-    name: 'session_id',
+    name: 'session',
   })
-  public sessionId: Session;
+  public session: Session;
 
   @Column({
     name: 'start_time',
@@ -69,7 +69,7 @@ export class Match extends BaseEntity {
   })
   public startTime: Date;
 
-  @OneToMany(type => TeamMatch, teamMatch => teamMatch.matchId, {
+  @OneToMany(type => TeamMatch, teamMatch => teamMatch.match, {
     cascade: ['insert', 'update', 'remove'],
   })
   public teams: TeamMatch[];

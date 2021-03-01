@@ -4,8 +4,8 @@ import { PlayerFormat } from '../../player/player-format.enum';
 import { SkillLevel } from '../skill-level.entity';
 
 export class GetSkillLevelDto {
-  @IsNotEmpty()
   @IsIn([PlayerFormat.EIGHT, PlayerFormat.NINE])
+  @IsNotEmpty()
   public format: PlayerFormat;
 
   @IsInt()

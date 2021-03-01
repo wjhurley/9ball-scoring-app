@@ -36,7 +36,7 @@ export class PlayerService {
   }
 
   public async deletePlayer(id: number, user: User): Promise<void> {
-    const result = await this.playerRepository.delete({ id, userId: user });
+    const result = await this.playerRepository.delete({ id, user });
 
     if (result.affected === 0) {
       throw new NotFoundException(`Player with ID "${id}" not found`);
@@ -44,7 +44,7 @@ export class PlayerService {
   }
 
   public async getPlayerById(id: number, user: User): Promise<Player> {
-    const player = await this.playerRepository.findOne({ where: { id, userId: user } });
+    const player = await this.playerRepository.findOne({ where: { id, user } });
 
     if (_.isUndefined(player)) {
       throw new NotFoundException(`Player with ID "${id}" not found`);

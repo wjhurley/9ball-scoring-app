@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 import { Match } from '../match/match.entity';
-import { PlayerGame } from '../entity/player-game.entity';
+import { PlayerGame } from '../player-game/player-game.entity';
 
 @Entity()
 export class Game extends BaseEntity {
@@ -51,11 +51,11 @@ export class Game extends BaseEntity {
 
   @ManyToOne(type => Match, match => match.games)
   @JoinColumn({
-    name: 'match_id',
+    name: 'match',
   })
-  public matchId: Match;
+  public match: Match;
 
-  @OneToMany(type => PlayerGame, playerGame => playerGame.gameId, {
+  @OneToMany(type => PlayerGame, playerGame => playerGame.game, {
     cascade: ['insert', 'update', 'remove'],
   })
   public players: PlayerGame[];

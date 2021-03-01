@@ -10,10 +10,10 @@ import {
 } from 'typeorm';
 
 import { Division } from '../division/division.entity';
-import { PlayerTeam } from '../entity/player-team.entity';
-import { TeamMatch } from '../entity/team-match.entity';
 import { HostLocation } from '../host-location/host-location.entity';
 import { PlayerFormat } from '../player/player-format.enum';
+import { PlayerTeam } from '../player-team/player-team.entity';
+import { TeamMatch } from '../team-match/team-match.entity';
 
 @Entity()
 @Unique('UQ_division_format_teamName', ['division', 'format', 'teamName'])
@@ -51,12 +51,12 @@ export class Team extends BaseEntity {
   })
   public id: number;
 
-  @OneToMany(type => TeamMatch, teamMatch => teamMatch.teamId, {
+  @OneToMany(type => TeamMatch, teamMatch => teamMatch.team, {
     cascade: ['insert', 'update', 'remove'],
   })
   public matches: TeamMatch[];
 
-  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.teamId, {
+  @OneToMany(type => PlayerTeam, playerTeam => playerTeam.team, {
     cascade: ['insert', 'update', 'remove'],
   })
   public players: PlayerTeam[];

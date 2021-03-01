@@ -6,7 +6,7 @@ import { Match } from '../../match/match.entity';
 export class GetGamesFilterDto {
   @IsNumberString()
   @IsOptional()
-  matchId: Match;
+  match: Match;
 
   @IsBooleanString()
   @IsOptional()

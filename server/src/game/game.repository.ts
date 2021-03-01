@@ -10,12 +10,12 @@ export class GameRepository extends Repository<Game> {
   private logger = new Logger('GameRepository');
 
   public async createGame(createGameDto: CreateGameDto): Promise<Game> {
-    const { matchId, postSeason, startTime } = createGameDto;
+    const { match, postSeason, startTime } = createGameDto;
 
     const game = new Game();
     game.deadBalls = 0;
     game.innings = 0;
-    game.matchId = matchId;
+    game.match = match;
     game.postSeason = postSeason;
     game.startTime = startTime;
 
@@ -34,7 +34,7 @@ export class GameRepository extends Repository<Game> {
 
   public async getGame(game: Game): Promise<Game | undefined> {
     try {
-      return await this.createQueryBuilder('game').where('game.id = :id', { id: game }).getOne();
+      return this.createQueryBuilder('game').where('game.id = :id', { id: game }).getOne();
     } catch (error) {
       this.logger.error(`Failed to get game info. Arguments: ${JSON.stringify(game)}`, error.stack);
       throw new NotFoundException();
@@ -42,17 +42,17 @@ export class GameRepository extends Repository<Game> {
   }
 
   public async getGames(getGamesDto: GetGamesFilterDto): Promise<Game[]> {
-    const { matchId, postSeason } = getGamesDto;
+    const { match, postSeason } = getGamesDto;
     const query = this.createQueryBuilder('game');
 
-    if (matchId) {
-      query.where('game.matchId = :matchId', { matchId });
+    if (match) {
+      query.where('game.match = :match', { match });
     } else if (postSeason) {
       query.where('game.postSeason = :postSeason', { postSeason });
     }
 
     try {
-      return await query.getMany();
+      return query.getMany();
     } catch (error) {
       this.logger.error(
         `Failed to get game info. Arguments: ${JSON.stringify(getGamesDto)}`,

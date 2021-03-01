@@ -1,9 +1,18 @@
-import { BaseEntity, Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 
 import { Game } from '../game/game.entity';
 import { Player } from '../player/player.entity';
 
 @Entity('player_game')
+@Unique('UQ_game_player', ['game', 'player'])
 export class PlayerGame extends BaseEntity {
   @Column({
     default: 0,
@@ -28,11 +37,16 @@ export class PlayerGame extends BaseEntity {
   })
   public defense: number;
 
-  @ManyToOne(type => Game, game => game.players, { primary: true })
+  @ManyToOne(type => Game, game => game.players)
   @JoinColumn({
-    name: 'game_id',
+    name: 'game',
   })
-  public gameId: Game;
+  public game: Game;
+
+  @PrimaryGeneratedColumn({
+    type: 'int',
+  })
+  public id: number;
 
   @Column({
     default: 0,
@@ -42,11 +56,11 @@ export class PlayerGame extends BaseEntity {
   })
   public nineOnSnap: number;
 
-  @ManyToOne(type => Player, player => player.games, { primary: true })
+  @ManyToOne(type => Player, player => player.games)
   @JoinColumn({
-    name: 'player_id',
+    name: 'player',
   })
-  public playerId: Player;
+  public player: Player;
 
   @Column({
     default: 0,

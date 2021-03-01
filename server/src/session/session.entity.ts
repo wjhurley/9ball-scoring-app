@@ -17,7 +17,7 @@ export class Session extends BaseEntity {
   })
   public id: number;
 
-  @OneToMany(type => Match, match => match.sessionId, {
+  @OneToMany(type => Match, match => match.session, {
     cascade: ['insert', 'update', 'remove'],
   })
   public matches: Match[];

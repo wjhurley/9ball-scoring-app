@@ -1,4 +1,5 @@
 # 9ball Scoring App
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 This is Chingu-Dolphins-3's project creating a scoring app for 9ball using [APA](https://poolplayers.com) rules.
 

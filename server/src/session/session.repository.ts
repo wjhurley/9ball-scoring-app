@@ -41,7 +41,7 @@ export class SessionRepository extends Repository<Session> {
     }
 
     try {
-      return await query.getMany();
+      return query.getMany();
     } catch (error) {
       this.logger.error(
         `Failed to get session info. Arguments: ${JSON.stringify(getSessionsDto)}`,

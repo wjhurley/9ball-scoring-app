@@ -44,6 +44,15 @@ export class TeamRepository extends Repository<Team> {
     return team;
   }
 
+  public async getTeam(team: Team): Promise<Team | undefined> {
+    try {
+      return this.createQueryBuilder('team').where('team.id = :id', { id: team }).getOne();
+    } catch (error) {
+      this.logger.error(`Failed to get team info. Arguments: ${JSON.stringify(team)}`, error.stack);
+      throw new NotFoundException();
+    }
+  }
+
   public async getTeams(getTeamsFilterDto: GetTeamsFilterDto, user: User): Promise<Team[]> {
     const { division, format, hostLocation } = getTeamsFilterDto;
     const query = this.createQueryBuilder('team')
@@ -55,11 +64,11 @@ export class TeamRepository extends Repository<Team> {
     } else if (format) {
       query.where('team.format = :format', { format });
     } else if (hostLocation) {
-      query.where('team.host_location = :hostLocation', { hostLocation });
+      query.where('team.hostLocation = :hostLocation', { hostLocation });
     }
 
     try {
-      return await query.getMany();
+      return query.getMany();
     } catch (error) {
       this.logger.error(
         `Failed to get teams for user "${user.email}". Filters: ${JSON.stringify(

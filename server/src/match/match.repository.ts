@@ -10,12 +10,12 @@ export class MatchRepository extends Repository<Match> {
   private logger = new Logger('MatchRepository');
 
   public async createMatch(createMatchDto: CreateMatchDto): Promise<Match> {
-    const { matchDate, postSeason, sessionId, startTime, weekNumber } = createMatchDto;
+    const { matchDate, postSeason, session, startTime, weekNumber } = createMatchDto;
 
     const match = new Match();
     match.matchDate = matchDate;
     match.postSeason = postSeason;
-    match.sessionId = sessionId;
+    match.session = session;
     match.startTime = startTime;
     match.weekNumber = weekNumber;
 
@@ -34,7 +34,7 @@ export class MatchRepository extends Repository<Match> {
 
   public async getMatch(match: Match): Promise<Match | undefined> {
     try {
-      return await this.createQueryBuilder('match').where('match.id = :id', { id: match }).getOne();
+      return this.createQueryBuilder('match').where('match.id = :id', { id: match }).getOne();
     } catch (error) {
       this.logger.error(
         `Failed to get match info. Arguments: ${JSON.stringify(match)}`,
@@ -45,21 +45,21 @@ export class MatchRepository extends Repository<Match> {
   }
 
   public async getMatches(getMatchesDto: GetMatchesFilterDto): Promise<Match[]> {
-    const { matchDate, postSeason, sessionId, weekNumber } = getMatchesDto;
+    const { matchDate, postSeason, session, weekNumber } = getMatchesDto;
     const query = this.createQueryBuilder('match');
 
     if (matchDate) {
       query.where('match.matchDate = :matchDate', { matchDate });
     } else if (postSeason) {
       query.where('match.postSeason = :postSeason', { postSeason });
-    } else if (sessionId) {
-      query.where('match.sessionId = :sessionId', { sessionId });
+    } else if (session) {
+      query.where('match.session = :session', { session });
     } else if (weekNumber) {
       query.where('match.weekNumber = :weekNumber', { weekNumber });
     }
 
     try {
-      return await query.getMany();
+      return query.getMany();
     } catch (error) {
       this.logger.error(
         `Failed to get match info. Arguments: ${JSON.stringify(getMatchesDto)}`,

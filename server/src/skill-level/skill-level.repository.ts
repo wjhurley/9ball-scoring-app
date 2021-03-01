@@ -12,7 +12,7 @@ export class SkillLevelRepository extends Repository<SkillLevel> {
     const { format, skillLevel } = getSkillLevelDto;
 
     try {
-      return await this.createQueryBuilder('skill_level')
+      return this.createQueryBuilder('skill_level')
         .where('skill_level.format = :format AND skill_level.skill_level = :skillLevel', {
           format,
           skillLevel,

@@ -42,13 +42,13 @@ export class GameService {
   }
 
   public async updateGame(id: number, updateGameDto: UpdateGameDto): Promise<Game> {
-    const { deadBalls, endTime, innings, matchId, postSeason, startTime } = updateGameDto;
+    const { deadBalls, endTime, innings, match, postSeason, startTime } = updateGameDto;
     const game = await this.getGameById(id);
 
     game.deadBalls = deadBalls || game.deadBalls;
     game.endTime = endTime || game.endTime;
     game.innings = innings || game.innings;
-    game.matchId = matchId || game.matchId;
+    game.match = match || game.match;
     game.postSeason = postSeason || game.postSeason;
     game.startTime = startTime || game.startTime;
     game.updatedAt = new Date(Date.now());
