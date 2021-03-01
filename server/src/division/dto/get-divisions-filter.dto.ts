@@ -14,9 +14,9 @@ export class GetDivisionsFilterDto {
     DayOfWeek.SATURDAY,
   ])
   @IsOptional()
-  public dayOfWeek: DayOfWeek;
+  public dayOfWeek?: DayOfWeek;
 
   @IsIn([PlayerFormat.EIGHT, PlayerFormat.NINE])
   @IsOptional()
-  public format: PlayerFormat;
+  public format?: PlayerFormat;
 }

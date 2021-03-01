@@ -5,25 +5,25 @@ import { Match } from '../../match/match.entity';
 export class UpdateGameDto {
   @IsInt()
   @IsOptional()
-  deadBalls: number;
+  deadBalls?: number;
 
   @IsMilitaryTime()
   @IsOptional()
-  endTime: Date;
+  endTime?: Date;
 
   @IsInt()
   @IsOptional()
-  innings: number;
+  innings?: number;
 
   @IsInt()
   @IsOptional()
-  match: Match;
+  match?: Match;
 
   @IsBoolean()
   @IsOptional()
-  postSeason: boolean;
+  postSeason?: boolean;
 
   @IsMilitaryTime()
   @IsOptional()
-  startTime: Date;
+  startTime?: Date;
 }

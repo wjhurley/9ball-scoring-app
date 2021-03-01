@@ -14,14 +14,14 @@ export class UpdateDivisionDto {
     DayOfWeek.SATURDAY,
   ])
   @IsOptional()
-  public dayOfWeek: DayOfWeek;
+  public dayOfWeek?: DayOfWeek;
 
   @IsIn([PlayerFormat.EIGHT, PlayerFormat.NINE])
   @IsOptional()
-  public format: PlayerFormat;
+  public format?: PlayerFormat;
 
   @IsOptional()
   @IsString()
   @Length(1, 25)
-  public name: string;
+  public name?: string;
 }

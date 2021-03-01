@@ -5,25 +5,25 @@ import { Session } from '../../session/session.entity';
 export class UpdateMatchDto {
   @IsMilitaryTime()
   @IsOptional()
-  endTime: Date;
+  endTime?: Date;
 
   @IsISO8601({ strict: true })
   @IsOptional()
-  matchDate: Date;
+  matchDate?: Date;
 
   @IsBoolean()
   @IsOptional()
-  postSeason: boolean;
+  postSeason?: boolean;
 
   @IsInt()
   @IsOptional()
-  session: Session;
+  session?: Session;
 
   @IsMilitaryTime()
   @IsOptional()
-  startTime: Date;
+  startTime?: Date;
 
   @IsInt()
   @IsOptional()
-  weekNumber: number;
+  weekNumber?: number;
 }

@@ -7,21 +7,21 @@ import { PlayerFormat } from '../../player/player-format.enum';
 export class UpdateTeamDto {
   @IsInt()
   @IsOptional()
-  public division: Division;
+  public division?: Division;
 
   @IsIn([PlayerFormat.EIGHT, PlayerFormat.NINE])
   @IsOptional()
-  public format: PlayerFormat;
+  public format?: PlayerFormat;
 
   @IsInt()
   @IsOptional()
-  public hostLocation: HostLocation;
+  public hostLocation?: HostLocation;
 
   @IsOptional()
   @IsString()
-  public teamName: string;
+  public teamName?: string;
 
   @IsInt()
   @IsOptional()
-  public teamNumber: number;
+  public teamNumber?: number;
 }

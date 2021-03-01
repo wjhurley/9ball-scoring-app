@@ -5,5 +5,5 @@ import { PlayerFormat } from '../player-format.enum';
 export class GetPlayersFilterDto {
   @IsIn([PlayerFormat.EIGHT, PlayerFormat.NINE])
   @IsOptional()
-  public format: PlayerFormat;
+  public format?: PlayerFormat;
 }

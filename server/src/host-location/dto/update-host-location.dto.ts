@@ -6,30 +6,30 @@ export class UpdateHostLocationDto {
   @IsOptional()
   @IsString()
   @Length(1, 100)
-  public address: string;
+  public address?: string;
 
   @IsOptional()
   @IsString()
   @Length(1, 20)
-  public city: string;
+  public city?: string;
 
   @IsOptional()
   @IsString()
   @Length(1, 30)
-  public name: string;
+  public name?: string;
 
   @IsInt()
   @IsOptional()
   @NumberLength(10)
-  public phoneNumber: number;
+  public phoneNumber?: number;
 
   @IsOptional()
   @IsString()
   @Length(2, 2)
-  public state: string;
+  public state?: string;
 
   @IsInt()
   @IsOptional()
   @NumberLength(5)
-  public zipCode: number;
+  public zipCode?: number;
 }

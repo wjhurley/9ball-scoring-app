@@ -6,17 +6,17 @@ import { Session } from '../../session/session.entity';
 export class GetMatchesFilterDto {
   @IsISO8601({ strict: true })
   @IsOptional()
-  matchDate: Date;
+  matchDate?: Date;
 
   @IsBooleanString()
   @IsOptional()
-  postSeason: boolean;
+  postSeason?: boolean;
 
   @IsNumberString()
   @IsOptional()
-  session: Session;
+  session?: Session;
 
   @IsNumberString()
   @IsOptional()
-  weekNumber: number;
+  weekNumber?: number;
 }

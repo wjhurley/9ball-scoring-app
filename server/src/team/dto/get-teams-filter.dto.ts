@@ -7,13 +7,13 @@ import { PlayerFormat } from '../../player/player-format.enum';
 export class GetTeamsFilterDto {
   @IsNumberString()
   @IsOptional()
-  public division: Division;
+  public division?: Division;
 
   @IsIn([PlayerFormat.EIGHT, PlayerFormat.NINE])
   @IsOptional()
-  public format: PlayerFormat;
+  public format?: PlayerFormat;
 
   @IsNumberString()
   @IsOptional()
-  public hostLocation: HostLocation;
+  public hostLocation?: HostLocation;
 }
