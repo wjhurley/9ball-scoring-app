@@ -46,7 +46,11 @@ export class TeamRepository extends Repository<Team> {
 
   public async getTeam(team: Team): Promise<Team | undefined> {
     try {
-      return this.createQueryBuilder('team').where('team.id = :id', { id: team }).getOne();
+      return this.createQueryBuilder('team')
+        .leftJoinAndSelect('team.division', 'division')
+        .leftJoinAndSelect('team.hostLocation', 'hostLocation')
+        .where('team.id = :id', { id: team })
+        .getOne();
     } catch (error) {
       this.logger.error(`Failed to get team info. Arguments: ${JSON.stringify(team)}`, error.stack);
       throw new NotFoundException();
