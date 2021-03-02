@@ -47,7 +47,7 @@ export class MatchService {
 
     match.endTime = endTime || match.endTime;
     match.matchDate = matchDate || match.matchDate;
-    match.postSeason = postSeason || match.postSeason;
+    match.postSeason = postSeason ?? match.postSeason;
     match.session = session || match.session;
     match.startTime = startTime || match.startTime;
     match.weekNumber = weekNumber || match.weekNumber;
