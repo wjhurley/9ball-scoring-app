@@ -1,6 +1,7 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Match } from '../match/match.entity';
+import { SessionName } from './session-name.enum';
 
 @Entity()
 export class Session extends BaseEntity {
@@ -23,10 +24,12 @@ export class Session extends BaseEntity {
   public matches: Match[];
 
   @Column({
-    length: 10,
+    default: SessionName.FALL,
+    enum: SessionName,
     nullable: false,
+    type: 'enum',
   })
-  public name: string;
+  public name: SessionName;
 
   @Column({
     default: null,

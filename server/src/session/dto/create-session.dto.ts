@@ -1,12 +1,12 @@
-import { IsInt, IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsIn, IsInt, IsNotEmpty } from 'class-validator';
 
 import { NumberLength } from '../../lib/custom.validator';
+import { SessionName } from '../session-name.enum';
 
 export class CreateSessionDto {
+  @IsIn([SessionName.FALL, SessionName.SPRING, SessionName.SUMMER])
   @IsNotEmpty()
-  @IsString()
-  @Length(1, 10)
-  public name: string;
+  public name: SessionName;
 
   @IsInt()
   @IsNotEmpty()
