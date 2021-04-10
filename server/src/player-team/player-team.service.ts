@@ -50,24 +50,34 @@ export class PlayerTeamService {
       );
     }
 
-    const otherTeamsInSameDivision = await this.teamRepository
+    const teamsInSameDivision = await this.teamRepository
       .createQueryBuilder('team')
       .select('team.id')
       .where('team.division = :division', { division: relatedTeam.division.id })
-      .getRawMany();
-    const otherTeamIds = otherTeamsInSameDivision.map(team => team.team_id);
-    const playerTeamsInSameDivision = await this.playerTeamRepository
-      .createQueryBuilder('player_team')
-      .leftJoinAndSelect('player_team.team', 'team')
-      .where('player_team.team IN (:...teams)', { teams: otherTeamIds })
       .getMany();
-    const playerTeamIds = playerTeamsInSameDivision.map(playerTeam => playerTeam.team.id);
+    const teamIds = teamsInSameDivision.map(team => team.id);
+    const playersOnTeamsInSameDivision = await this.playerTeamRepository
+      .createQueryBuilder('player_team')
+      .select('player_team.id')
+      .addSelect('player.id')
+      .addSelect('team.id')
+      .innerJoin('player_team.player', 'player')
+      .innerJoin('player_team.team', 'team')
+      .where('player_team.team IN (:...teams)', { teams: teamIds })
+      .getMany();
+    const isPlayerAlreadyOnTeam = playersOnTeamsInSameDivision.some(
+      playerTeam =>
+        playerTeam.player.id === relatedPlayer.id && playerTeam.team.id === relatedTeam.id,
+    );
+    const isPlayerOnAnotherTeam = playersOnTeamsInSameDivision.some(
+      playerTeam => playerTeam.player.id === relatedPlayer.id,
+    );
 
-    if (playerTeamIds.includes(relatedTeam.id)) {
+    if (isPlayerAlreadyOnTeam) {
       throw new ConflictException('Player is already on this team!');
     }
 
-    if (playerTeamsInSameDivision.length) {
+    if (isPlayerOnAnotherTeam) {
       throw new ConflictException('Player is already on another team in the same division');
     }
 
