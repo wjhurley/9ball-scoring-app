@@ -1,40 +1,40 @@
-import { DayOfWeek } from '../division/day-of-week.enum';
+import { DayOfWeekName } from '../division/day-of-week.enum';
 import { Division } from '../division/division.entity';
 import { PlayerFormat } from '../player/player-format.enum';
 
 export const DivisionSeed: Array<Partial<Division>> = [
   {
-    dayOfWeek: DayOfWeek.SUNDAY,
+    dayOfWeek: DayOfWeekName.SUNDAY,
     format: PlayerFormat.EIGHT,
     name: 'SDJ8',
   },
   {
-    dayOfWeek: DayOfWeek.SUNDAY,
+    dayOfWeek: DayOfWeekName.SUNDAY,
     format: PlayerFormat.NINE,
     name: 'SDJ9',
   },
   {
-    dayOfWeek: DayOfWeek.TUESDAY,
+    dayOfWeek: DayOfWeekName.TUESDAY,
     format: PlayerFormat.NINE,
     name: 'TUE9',
   },
   {
-    dayOfWeek: DayOfWeek.WEDNESDAY,
+    dayOfWeek: DayOfWeekName.WEDNESDAY,
     format: PlayerFormat.EIGHT,
     name: 'WDJ8',
   },
   {
-    dayOfWeek: DayOfWeek.WEDNESDAY,
+    dayOfWeek: DayOfWeekName.WEDNESDAY,
     format: PlayerFormat.NINE,
     name: 'WDJ9',
   },
   {
-    dayOfWeek: DayOfWeek.THURSDAY,
+    dayOfWeek: DayOfWeekName.THURSDAY,
     format: PlayerFormat.EIGHT,
     name: 'TDJ8',
   },
   {
-    dayOfWeek: DayOfWeek.THURSDAY,
+    dayOfWeek: DayOfWeekName.THURSDAY,
     format: PlayerFormat.NINE,
     name: 'TDJ9',
   },

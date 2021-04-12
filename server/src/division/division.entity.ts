@@ -2,7 +2,7 @@ import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique }
 
 import { PlayerFormat } from '../player/player-format.enum';
 import { Team } from '../team/team.entity';
-import { DayOfWeek } from './day-of-week.enum';
+import { DayOfWeekName } from './day-of-week.enum';
 
 @Entity()
 @Unique('UQ_dayOfWeek_name', ['dayOfWeek', 'name'])
@@ -16,13 +16,13 @@ export class Division extends BaseEntity {
   public createdAt: Date;
 
   @Column({
-    default: DayOfWeek.SUNDAY,
-    enum: DayOfWeek,
+    default: DayOfWeekName.SUNDAY,
+    enum: DayOfWeekName,
     name: 'day_of_week',
     nullable: false,
     type: 'enum',
   })
-  public dayOfWeek: DayOfWeek;
+  public dayOfWeek: DayOfWeekName;
 
   @Column({
     default: PlayerFormat.NINE,
