@@ -90,7 +90,7 @@ export class PlayerGame extends BaseEntity {
     nullable: false,
     type: 'smallint',
   })
-  public timeout: number;
+  public timeouts: number;
 
   @Column({
     default: null,
