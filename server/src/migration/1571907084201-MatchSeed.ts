@@ -3,7 +3,7 @@ import { getRepository, MigrationInterface, QueryRunner } from 'typeorm';
 
 import { MatchSeed } from '../seed/match.seed';
 
-export class MatchSeed1571907084200 implements MigrationInterface {
+export class MatchSeed1571907084201 implements MigrationInterface {
   private logger = new Logger('MatchSeed');
 
   public async up(queryRunner: QueryRunner): Promise<void> {

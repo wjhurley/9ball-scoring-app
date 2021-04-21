@@ -5,7 +5,7 @@ import { Player } from '../player/player.entity';
 import { Team } from '../team/team.entity';
 import { PlayerTeamSeed } from '../seed/player-team.seed';
 
-export class PlayerTeamSeed1571907084199 implements MigrationInterface {
+export class PlayerTeamSeed1571907084200 implements MigrationInterface {
   private logger = new Logger('PlayerTeamSeed');
 
   public async up(queryRunner: QueryRunner): Promise<void> {

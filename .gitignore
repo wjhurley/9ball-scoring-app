@@ -46,6 +46,7 @@ lerna-debug.log*
 .env.test.local
 .env.production.local
 ormconfig.json
+/server/src/seed/user.seed.ts
 
 # OS
 .DS_Store

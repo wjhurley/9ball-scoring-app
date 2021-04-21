@@ -1,0 +1,40 @@
+import { User } from '../auth/user.entity';
+
+export const UserSeed: Array<Partial<User>> = [
+  {
+    email: 'cyclops@gmail.com',
+    firstName: 'Scott',
+    lastName: 'Summers',
+    password: 'SomeSecretPassword',
+  },
+  {
+    email: 'jeangrey@gmail.com',
+    firstName: 'Jean',
+    lastName: 'Grey',
+    password: 'SomeSecretPassword',
+  },
+  {
+    email: 'professorx@gmail.com',
+    firstName: 'Charles',
+    lastName: 'Xavier',
+    password: 'SomeSecretPassword',
+  },
+  {
+    email: 'angel@gmail.com',
+    firstName: 'Warren',
+    lastName: 'Worthington',
+    password: 'SomeSecretPassword',
+  },
+  {
+    email: 'iceman@gmail.com',
+    firstName: 'Bobby',
+    lastName: 'Drake',
+    password: 'SomeSecretPassword',
+  },
+  {
+    email: 'beast@gmail.com',
+    firstName: 'Henry',
+    lastName: 'McCoy',
+    password: 'SomeSecretPassword',
+  },
+];

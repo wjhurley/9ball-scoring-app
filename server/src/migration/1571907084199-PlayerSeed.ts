@@ -4,7 +4,7 @@ import { getRepository, MigrationInterface, QueryRunner } from 'typeorm';
 import { User } from '../auth/user.entity';
 import { PlayerSeed } from '../seed/player.seed';
 
-export class PlayerSeed1571907084198 implements MigrationInterface {
+export class PlayerSeed1571907084199 implements MigrationInterface {
   private logger = new Logger('PlayerSeed');
 
   public async up(queryRunner: QueryRunner): Promise<void> {
