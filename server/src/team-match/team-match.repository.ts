@@ -52,8 +52,8 @@ export class TeamMatchRepository extends Repository<TeamMatch> {
   ): Promise<TeamMatch[]> {
     const { homeTeam, match, team, won } = getTeamMatchesFilterDto;
     const query = this.createQueryBuilder('team_match')
-      .leftJoinAndSelect('team_match.match', 'match')
-      .leftJoinAndSelect('team_match.team', 'team');
+      .innerJoinAndSelect('team_match.match', 'match')
+      .innerJoinAndSelect('team_match.team', 'team');
 
     if (homeTeam) {
       query.where('team_match.homeTeam = :homeTeam', { homeTeam });

@@ -51,11 +51,12 @@ export class TeamMatchService {
       .innerJoinAndSelect('team_match.team', 'team')
       .innerJoin('team.division', 'division')
       .where('team_match.match = :match', { match: relatedMatch.id })
+      .andWhere('team_match.team != :team', { team: relatedTeam.id })
       .getOne();
 
     if (
       !_.isUndefined(otherTeamInMatch) &&
-      otherTeamInMatch?.team.division.id !== relatedTeam.division.id
+      otherTeamInMatch.team.division.id !== relatedTeam.division.id
     ) {
       throw new UnprocessableEntityException(`Team's division does not match other team in match`);
     }
@@ -68,21 +69,17 @@ export class TeamMatchService {
       throw new ConflictException('One of the teams in this match must be set as the home team');
     }
 
-    const teamsInSameDivision = await this.teamRepository
-      .createQueryBuilder('team')
-      .select('team.id')
-      .where('team.division = :division', { division: relatedTeam.division.id })
-      .getMany();
-    const teamIds = teamsInSameDivision.map(team => team.id);
     const teamMatchesForThisWeek = await this.teamMatchRepository
       .createQueryBuilder('team_match')
       .select('team_match.id')
       .addSelect('match.id')
       .addSelect('match.weekNumber')
       .addSelect('team.id')
+      .addSelect('division.id')
       .innerJoin('team_match.match', 'match')
       .innerJoin('team_match.team', 'team')
-      .where('team_match.team IN (:...teams)', { teams: teamIds })
+      .innerJoin('team.division', 'division')
+      .where('team.division = :division', { division: relatedTeam.division.id })
       .andWhere('match.weekNumber = :weekNumber', { weekNumber: relatedMatch.weekNumber })
       .getMany();
     const isTeamAlreadyInMatch = teamMatchesForThisWeek.some(
