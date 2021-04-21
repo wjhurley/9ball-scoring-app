@@ -54,8 +54,8 @@ export class PlayerTeamRepository extends Repository<PlayerTeam> {
   ): Promise<PlayerTeam[]> {
     const { captain, coCaptain, player, team } = getPlayerTeamsFilterDto;
     const query = this.createQueryBuilder('player_team')
-      .leftJoinAndSelect('player_team.player', 'player')
-      .leftJoinAndSelect('player_team.team', 'team');
+      .innerJoinAndSelect('player_team.player', 'player')
+      .innerJoinAndSelect('player_team.team', 'team');
 
     if (captain) {
       query.where('player_team.captain = :captain', { captain });
