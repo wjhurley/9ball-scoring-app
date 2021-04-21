@@ -47,8 +47,8 @@ export class TeamRepository extends Repository<Team> {
   public async getTeam(team: Team): Promise<Team | undefined> {
     try {
       return this.createQueryBuilder('team')
-        .leftJoinAndSelect('team.division', 'division')
-        .leftJoinAndSelect('team.hostLocation', 'hostLocation')
+        .innerJoinAndSelect('team.division', 'division')
+        .innerJoinAndSelect('team.hostLocation', 'hostLocation')
         .where('team.id = :id', { id: team })
         .getOne();
     } catch (error) {
@@ -60,8 +60,8 @@ export class TeamRepository extends Repository<Team> {
   public async getTeams(getTeamsFilterDto: GetTeamsFilterDto, user: User): Promise<Team[]> {
     const { division, format, hostLocation } = getTeamsFilterDto;
     const query = this.createQueryBuilder('team')
-      .leftJoinAndSelect('team.division', 'division')
-      .leftJoinAndSelect('team.hostLocation', 'hostLocation');
+      .innerJoinAndSelect('team.division', 'division')
+      .innerJoinAndSelect('team.hostLocation', 'hostLocation');
 
     if (division) {
       query.where('team.division = :division', { division });
