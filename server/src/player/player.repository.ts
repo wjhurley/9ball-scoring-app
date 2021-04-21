@@ -47,7 +47,11 @@ export class PlayerRepository extends Repository<Player> {
 
   public async getPlayer(player: Player): Promise<Player | undefined> {
     try {
-      return this.createQueryBuilder('player').where('player.id = :id', { id: player }).getOne();
+      return this.createQueryBuilder('player')
+        .innerJoinAndSelect('player.teams', 'teams')
+        .innerJoinAndSelect('teams.team', 'team')
+        .where('player.id = :id', { id: player })
+        .getOne();
     } catch (error) {
       this.logger.error(
         `Failed to get player info. Arguments: ${JSON.stringify(player)}`,

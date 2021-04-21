@@ -45,4 +45,40 @@ export const PlayerSeed: Array<Partial<PlayerSeedEntity>> = [
     skillLevel: 2,
     user: 3,
   },
+  {
+    format: PlayerFormat.EIGHT,
+    playerNumber: 98213579,
+    skillLevel: 11,
+    user: 4,
+  },
+  {
+    format: PlayerFormat.NINE,
+    playerNumber: 98213579,
+    skillLevel: 2,
+    user: 4,
+  },
+  {
+    format: PlayerFormat.EIGHT,
+    playerNumber: 98202468,
+    skillLevel: 12,
+    user: 5,
+  },
+  {
+    format: PlayerFormat.NINE,
+    playerNumber: 98202468,
+    skillLevel: 3,
+    user: 5,
+  },
+  {
+    format: PlayerFormat.EIGHT,
+    playerNumber: 98212089,
+    skillLevel: 12,
+    user: 6,
+  },
+  {
+    format: PlayerFormat.NINE,
+    playerNumber: 98212089,
+    skillLevel: 3,
+    user: 6,
+  },
 ];
