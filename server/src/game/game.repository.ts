@@ -1,6 +1,7 @@
 import { InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
 
+import { User } from '../auth/user.entity';
 import { Game } from './game.entity';
 import { CreateGameDto } from './dto/create-game.dto';
 import { GetGamesFilterDto } from './dto/get-games-filter.dto';
@@ -9,7 +10,7 @@ import { GetGamesFilterDto } from './dto/get-games-filter.dto';
 export class GameRepository extends Repository<Game> {
   private logger = new Logger('GameRepository');
 
-  public async createGame(createGameDto: CreateGameDto): Promise<Game> {
+  public async createGame(createGameDto: CreateGameDto, user: User): Promise<Game> {
     const { match, postSeason, startTime } = createGameDto;
 
     const game = new Game();
@@ -23,7 +24,7 @@ export class GameRepository extends Repository<Game> {
       await game.save();
     } catch (error) {
       this.logger.error(
-        `Failed to create game. Data: ${JSON.stringify(createGameDto)}`,
+        `Failed to create game for user "${user.email}". Data: ${JSON.stringify(createGameDto)}`,
         error.stack,
       );
       throw new InternalServerErrorException();

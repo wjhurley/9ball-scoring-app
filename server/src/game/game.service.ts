@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as _ from 'lodash';
 
+import { User } from '../auth/user.entity';
 import { Game } from './game.entity';
 import { GameRepository } from './game.repository';
 import { CreateGameDto } from './dto/create-game.dto';
@@ -15,8 +16,8 @@ export class GameService {
     private gameRepository: GameRepository,
   ) {}
 
-  public async createGame(createGameDto: CreateGameDto): Promise<Game> {
-    return this.gameRepository.createGame(createGameDto);
+  public async createGame(createGameDto: CreateGameDto, user: User): Promise<Game> {
+    return this.gameRepository.createGame(createGameDto, user);
   }
 
   public async deleteGame(id: number): Promise<void> {

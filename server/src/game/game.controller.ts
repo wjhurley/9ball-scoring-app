@@ -36,7 +36,7 @@ export class GameController {
     this.logger.verbose(
       `User "${user.email}" creating a new game. Data: ${JSON.stringify(createGameDto)}`,
     );
-    return this.gameService.createGame(createGameDto);
+    return this.gameService.createGame(createGameDto, user);
   }
 
   @Delete('/:id')
