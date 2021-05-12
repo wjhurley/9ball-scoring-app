@@ -121,6 +121,40 @@ export class PlayerTeamService {
   ): Promise<PlayerTeam> {
     const { captain, coCaptain } = updatePlayerTeamDto;
     const playerTeam = await this.getPlayerTeamById(id);
+    const teamCaptain = await this.playerTeamRepository
+      .createQueryBuilder('player_team')
+      .select('player_team.captain')
+      .addSelect('player.id')
+      .innerJoin('player_team.player', 'player')
+      .where('player_team.team = :team', { team: playerTeam.team.id })
+      .andWhere('player_team.captain = :captain', { captain: true })
+      .getOne();
+    const teamCoCaptain = await this.playerTeamRepository
+      .createQueryBuilder('player_team')
+      .select('player_team.coCaptain')
+      .addSelect('player.id')
+      .innerJoin('player_team.player', 'player')
+      .where('player_team.team = :team', { team: playerTeam.team.id })
+      .andWhere('player_team.coCaptain = :coCaptain', { coCaptain: true })
+      .getOne();
+
+    if (
+      !_.isNil(captain) &&
+      captain &&
+      teamCaptain &&
+      teamCaptain.player.id !== playerTeam.player.id
+    ) {
+      throw new ConflictException('Only one player can be set as the captain for this team');
+    }
+
+    if (
+      !_.isNil(coCaptain) &&
+      coCaptain &&
+      teamCoCaptain &&
+      teamCoCaptain.player.id !== playerTeam.player.id
+    ) {
+      throw new ConflictException('Only one player can be set as the co-captain for this team');
+    }
 
     playerTeam.captain = captain ?? playerTeam.captain;
     playerTeam.coCaptain = coCaptain ?? playerTeam.coCaptain;
