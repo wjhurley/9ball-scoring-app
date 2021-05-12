@@ -149,9 +149,6 @@ export class TeamMatchService {
       .createQueryBuilder('team_match')
       .select('team_match.homeTeam')
       .addSelect('team_match.won')
-      .addSelect('division.id')
-      .innerJoinAndSelect('team_match.team', 'team')
-      .innerJoin('team.division', 'division')
       .where('team_match.match = :match', { match: teamMatch.match.id })
       .andWhere('team_match.team != :team', { team: teamMatch.team.id })
       .getOne();
