@@ -11,8 +11,10 @@ import { GameModule } from './game/game.module';
 import { HostLocationModule } from './host-location/host-location.module';
 import { MatchModule } from './match/match.module';
 import { PlayerModule } from './player/player.module';
+import { PlayerGameModule } from './player-game/player-game.module';
 import { PlayerTeamModule } from './player-team/player-team.module';
 import { SessionModule } from './session/session.module';
+import { TeamMatchModule } from './team-match/team-match.module';
 import { TeamModule } from './team/team.module';
 
 const configService = new ConfigService();
@@ -28,9 +30,11 @@ const configSettings = ormConfigService.getConfig();
     GameModule,
     HostLocationModule,
     MatchModule,
+    PlayerGameModule,
     PlayerModule,
     PlayerTeamModule,
     SessionModule,
+    TeamMatchModule,
     TeamModule,
     TypeOrmModule.forRoot(configSettings),
   ],
