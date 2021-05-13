@@ -1,5 +1,6 @@
 # 9ball Scoring App
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
+[![Wallaby.js](https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=flat&logo=github)](https://wallabyjs.com/oss/)
 
 This is Chingu-Dolphins-3's project creating a scoring app for 9ball using [APA](https://poolplayers.com) rules.
 
@@ -61,3 +62,12 @@ npm install
 
 ### Making your Contribution
 Coming Soon
+
+### Wallaby.js
+
+[![Wallaby.js](https://img.shields.io/badge/wallaby.js-powered-blue.svg?style=for-the-badge&logo=github)](https://wallabyjs.com/oss/)
+
+This repository's contributors are welcome to use
+[Wallaby.js OSS License](https://wallabyjs.com/oss/) to get
+test results immediately as you type, and see the results in
+your editor right next to your code.
