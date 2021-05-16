@@ -8,6 +8,8 @@ import { User } from './user.entity';
 
 export const duplicateEntryErrorCode = '23505';
 
+export type UserNameAndEmail = Pick<User, 'email' | 'firstName' | 'lastName'>;
+
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   private async hashPassword(password: string, salt: string): Promise<string> {
@@ -37,12 +39,16 @@ export class UserRepository extends Repository<User> {
 
   public async validateUserPassword(
     authCredentialsDto: AuthCredentialsDto,
-  ): Promise<string | null> {
+  ): Promise<UserNameAndEmail | null> {
     const { email, password } = authCredentialsDto;
     const user = await this.findOne({ email });
 
     if (user && (await user.validatePassword(password))) {
-      return user.email;
+      return {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      };
     } else {
       return null;
     }

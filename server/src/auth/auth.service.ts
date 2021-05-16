@@ -5,7 +5,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtPayload } from './jwt-payload.interface';
-import { UserRepository } from './user.repository';
+import { UserNameAndEmail, UserRepository } from './user.repository';
+
+import type { Merge } from 'ts-essentials';
+
+export type UserInfo = Merge<UserNameAndEmail, { accessToken: string }>;
 
 @Injectable()
 export class AuthService {
@@ -21,17 +25,20 @@ export class AuthService {
     return this.userRepository.signUp(createUserDto);
   }
 
-  public async signIn(authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
-    const email = await this.userRepository.validateUserPassword(authCredentialsDto);
+  public async signIn(authCredentialsDto: AuthCredentialsDto): Promise<UserInfo> {
+    const user = await this.userRepository.validateUserPassword(authCredentialsDto);
 
-    if (!email) {
+    if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const payload: JwtPayload = { email };
+    const payload: JwtPayload = { email: user.email };
     const accessToken = await this.jwtService.sign(payload);
     this.logger.debug(`Generated JWT Token with payload ${JSON.stringify(payload)}`);
 
-    return { accessToken };
+    return {
+      ...user,
+      accessToken,
+    };
   }
 }
