@@ -63,9 +63,10 @@ export class PlayerRepository extends Repository<Player> {
 
   public async getPlayers(filterDto: GetPlayersFilterDto, user: User): Promise<Player[]> {
     const { format } = filterDto;
-    const query = this.createQueryBuilder('player');
-
-    query.where('player.user = :user', { user: user.id });
+    const query = this.createQueryBuilder('player')
+      .innerJoinAndSelect('player.teams', 'teams')
+      .innerJoinAndSelect('teams.team', 'team')
+      .where('player.user = :user', { user: user.id });
 
     if (format) {
       query.andWhere('player.format = :format', { format });
