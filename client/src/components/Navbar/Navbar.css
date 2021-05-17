@@ -1,11 +1,11 @@
 .navbar {
   display: flex;
   flex-direction: row;
-  list-style-type: none;
-  padding-top: 10px;
   padding-bottom: 10px;
+  padding-top: 10px;
 }
 .navitem {
-  flex: 1;
   cursor: pointer;
+  flex: 1;
+  list-style-type: none;
 }
