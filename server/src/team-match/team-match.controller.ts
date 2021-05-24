@@ -13,8 +13,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 
+import { CookieAuthenticationGuard } from '../auth/cookie-authentication.guard';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { CreateTeamMatchDto } from './dto/create-team-match.dto';
@@ -24,7 +24,7 @@ import { TeamMatch } from './team-match.entity';
 import { TeamMatchService } from './team-match.service';
 
 @Controller('api/team-match')
-@UseGuards(AuthGuard())
+@UseGuards(CookieAuthenticationGuard)
 export class TeamMatchController {
   constructor(private teamMatchService: TeamMatchService) {}
 

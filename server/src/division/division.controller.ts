@@ -13,8 +13,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 
+import { CookieAuthenticationGuard } from '../auth/cookie-authentication.guard';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { Division } from './division.entity';
@@ -24,7 +24,7 @@ import { GetDivisionsFilterDto } from './dto/get-divisions-filter.dto';
 import { UpdateDivisionDto } from './dto/update-division.dto';
 
 @Controller('api/division')
-@UseGuards(AuthGuard())
+@UseGuards(CookieAuthenticationGuard)
 export class DivisionController {
   constructor(private divisionService: DivisionService) {}
 

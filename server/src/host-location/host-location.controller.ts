@@ -13,8 +13,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 
+import { CookieAuthenticationGuard } from '../auth/cookie-authentication.guard';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { CreateHostLocationDto } from './dto/create-host-location.dto';
@@ -24,7 +24,7 @@ import { HostLocation } from './host-location.entity';
 import { HostLocationService } from './host-location.service';
 
 @Controller('api/host-location')
-@UseGuards(AuthGuard())
+@UseGuards(CookieAuthenticationGuard)
 export class HostLocationController {
   constructor(private hostLocationService: HostLocationService) {}
 

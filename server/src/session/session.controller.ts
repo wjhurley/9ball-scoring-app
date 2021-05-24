@@ -13,8 +13,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 
+import { CookieAuthenticationGuard } from '../auth/cookie-authentication.guard';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { Session } from './session.entity';
@@ -24,7 +24,7 @@ import { GetSessionsFilterDto } from './dto/get-sessions-filter.dto';
 import { UpdateSessionDto } from './dto/update-session.dto';
 
 @Controller('api/session')
-@UseGuards(AuthGuard())
+@UseGuards(CookieAuthenticationGuard)
 export class SessionController {
   constructor(private sessionService: SessionService) {}
 

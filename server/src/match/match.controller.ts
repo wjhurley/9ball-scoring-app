@@ -13,8 +13,8 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 
+import { CookieAuthenticationGuard } from '../auth/cookie-authentication.guard';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
 import { Match } from './match.entity';
@@ -24,7 +24,7 @@ import { GetMatchesFilterDto } from './dto/get-matches-filter.dto';
 import { UpdateMatchDto } from './dto/update-match.dto';
 
 @Controller('api/match')
-@UseGuards(AuthGuard())
+@UseGuards(CookieAuthenticationGuard)
 export class MatchController {
   constructor(private matchService: MatchService) {}
 
