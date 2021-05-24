@@ -2,6 +2,7 @@ import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 
+import { AppConfigService } from '../config/app/config.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtPayload } from './jwt-payload.interface';
@@ -14,15 +15,17 @@ export type UserInfo = Merge<UserNameAndEmail, { accessToken: string }>;
 @Injectable()
 export class AuthService {
   public constructor(
+    private readonly configService: AppConfigService,
+    private readonly jwtService: JwtService,
     @InjectRepository(UserRepository)
-    private userRepository: UserRepository,
-    private jwtService: JwtService,
+    private readonly userRepository: UserRepository,
   ) {}
 
   private logger = new Logger('AuthService');
 
-  public async signUp(createUserDto: CreateUserDto): Promise<void> {
-    return this.userRepository.signUp(createUserDto);
+  public async getCookieWithJwtToken(payload: JwtPayload) {
+    const token = await this.jwtService.sign(payload);
+    return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.jwtExpires}`;
   }
 
   public async signIn(authCredentialsDto: AuthCredentialsDto): Promise<UserInfo> {
@@ -40,5 +43,9 @@ export class AuthService {
       ...user,
       accessToken,
     };
+  }
+
+  public async signUp(createUserDto: CreateUserDto): Promise<void> {
+    return this.userRepository.signUp(createUserDto);
   }
 }

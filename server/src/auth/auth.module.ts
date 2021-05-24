@@ -9,6 +9,7 @@ import { AppConfigService } from '../config/app/config.service';
 import { JwtConfigService } from '../config/jwt-config.service';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { CookieStrategy } from './cookie.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { UserRepository } from './user.repository';
 
@@ -19,13 +20,13 @@ const jwtConfig = jwtConfigService.getJwtModuleOptions();
 
 @Module({
   controllers: [AuthController],
-  exports: [JwtStrategy, PassportModule],
+  exports: [CookieStrategy, JwtStrategy, PassportModule],
   imports: [
     AppConfigModule,
     JwtModule.register(jwtConfig),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     TypeOrmModule.forFeature([UserRepository]),
   ],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, CookieStrategy, JwtStrategy],
 })
 export class AuthModule {}
