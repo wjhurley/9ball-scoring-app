@@ -23,7 +23,11 @@ export class AuthService {
 
   private logger = new Logger('AuthService');
 
-  public async getCookieWithJwtToken(payload: JwtPayload) {
+  public getCookieForSignOut(): string {
+    return `Authentication=; HttpOnly; Path=/; Max-Age=0`;
+  }
+
+  public async getCookieWithJwtToken(payload: JwtPayload): Promise<string> {
     const token = await this.jwtService.sign(payload);
     return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.jwtExpires}`;
   }
